@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krisha Dave — Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+  <script src="cursor-boot.js"></script>
+  <link rel="stylesheet" href="cursor.css">
+  <link rel="stylesheet" href="scroll-reveal.css">
+  <script src="page-sounds.js"></script>
+  <script src="scroll-reveal.js" defer></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Design pixel unit — scales the whole 1280px design proportionally to viewport
+       width with no cap so the layout stays wall-to-wall on any monitor. */
+    :root {
+      --u: calc(100vw / 1280);
+    }
+
+    html, body {
+      background: #ffffff;
+      font-family: 'Pixelify Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .page {
+      position: relative;
+      width: calc(1280 * var(--u));
+      height: calc(7800 * var(--u));
+      margin: 0 auto;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    /* === Top navigation === */
+    .nav {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .nav__divider {
+      position: absolute;
+      top: calc(44 * var(--u));
+      left: 0; right: 0;
+      height: 1px;
+      background: #000;
+    }
+
+    .nav__logo {
+      position: absolute;
+      top: calc(-6 * var(--u));
+      left: calc(5 * var(--u));
+      width: calc(38 * var(--u));
+      height: calc(55 * var(--u));
+      object-fit: cover;
+    }
+
+    .nav a, .nav span {
+      position: absolute;
+      top: calc(13 * var(--u));
+      font-family: 'Pixelify Sans', sans-serif;
+      font-size: calc(16 * var(--u));
+      line-height: 1;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .nav a:hover { opacity: 0.6; }
+
+    .nav__home        { left: calc(46 * var(--u));   color: #000ca9; }
+    .nav__photography {
+      left: calc(749 * var(--u));
+      color: transparent;
+      -webkit-text-stroke: calc(0.7 * var(--u)) #000;
+      cursor: default;
+    }
+    .nav__creative    { left: calc(902 * var(--u));  color: #000; }
+    .nav__paint       { left: calc(1113 * var(--u)); color: #000; }
+    .nav__contact     { left: calc(1207 * var(--u)); color: #000; }
+
+    /* === Photos === */
+    .photo {
+      position: absolute;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* Photos that need an inner zoom-crop (e.g., to hide polaroid borders) */
+    .photo-frame {
+      position: absolute;
+      overflow: hidden;
+      display: block;
+    }
+    .photo-frame > img {
+      position: absolute;
+      display: block;
+      max-width: none;
+      object-fit: cover;
+    }
+
+    /* === Labels (overlay text on photos) === */
+    .label {
+      position: absolute;
+      font-family: 'Pixelify Sans', sans-serif;
+      font-size: calc(16 * var(--u));
+      color: #fff;
+      line-height: 1.2;
+      white-space: nowrap;
+      z-index: 5;
+    }
+
+    /* === Footer link === */
+    .footer-link {
+      position: absolute;
+      left: calc(1012 * var(--u));
+      top: calc(7673 * var(--u));
+      font-family: 'Pixelify Sans', sans-serif;
+      font-size: calc(24 * var(--u));
+      color: #0900ff;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .footer-link:hover { opacity: 0.7; }
+
+    /* === Section 1: FREDERICO CINA 2024 (4 photos top row) === */
+    .ph-01 { left: calc(-30 * var(--u));  top: calc(44 * var(--u));   width: calc(323 * var(--u)); height: calc(342 * var(--u)); }
+    .ph-02 { left: calc(293 * var(--u));  top: calc(44 * var(--u));   width: calc(332 * var(--u)); height: calc(342 * var(--u)); }
+    .ph-03 { left: calc(625 * var(--u));  top: calc(44 * var(--u));   width: calc(330 * var(--u)); height: calc(343 * var(--u)); }
+    .ph-04 { left: calc(953 * var(--u));  top: calc(44 * var(--u));   width: calc(327 * var(--u)); height: calc(343 * var(--u)); }
+    .label-frederico { left: calc(1117 * var(--u)); top: calc(576 * var(--u)); }
+
+    /* === Section 2: 2 large + right column of 3 === */
+    .ph-05 { left: 0;                      top: calc(383 * var(--u));  width: calc(480 * var(--u)); height: calc(653 * var(--u)); }
+    .ph-06 { left: calc(480 * var(--u));   top: calc(383 * var(--u));  width: calc(473 * var(--u)); height: calc(653 * var(--u)); }
+    .ph-07 { left: calc(953 * var(--u));   top: calc(383 * var(--u));  width: calc(327 * var(--u)); height: calc(218 * var(--u)); }
+    .ph-08 { left: calc(953 * var(--u));   top: calc(600 * var(--u));  width: calc(327 * var(--u)); height: calc(219 * var(--u)); }
+    .ph-09 { left: calc(953 * var(--u));   top: calc(818 * var(--u));  width: calc(327 * var(--u)); height: calc(218 * var(--u)); }
+
+    /* === Section 3: full-width banner === */
+    .ph-10 { left: calc(-15 * var(--u));   top: calc(1036 * var(--u)); width: calc(1295 * var(--u)); height: calc(740 * var(--u)); }
+
+    /* === Section 4: PITTI UOMO 2024 (3 photos) === */
+    .label-pitti { left: calc(1135 * var(--u)); top: calc(1743 * var(--u)); }
+    .ph-11 { left: 0;                      top: calc(1776 * var(--u)); width: calc(429 * var(--u)); height: calc(644 * var(--u)); }
+    .ph-12 { left: calc(429 * var(--u));   top: calc(1776 * var(--u)); width: calc(449 * var(--u)); height: calc(644 * var(--u)); }
+    .ph-13 { left: calc(878 * var(--u));   top: calc(1776 * var(--u)); width: calc(429 * var(--u)); height: calc(644 * var(--u)); }
+
+    /* === Section 5: JORDANLUCA 2025 (2 photos) === */
+    .label-jordanluca { left: calc(17 * var(--u)); top: calc(2389 * var(--u)); }
+    .ph-14 { left: 0;                      top: calc(2420 * var(--u)); width: calc(634 * var(--u)); height: calc(956 * var(--u)); }
+    .ph-15 { left: calc(633 * var(--u));   top: calc(2420 * var(--u)); width: calc(666 * var(--u)); height: calc(956 * var(--u)); }
+
+    /* === Section 6: 2 photos === */
+    .ph-16 { left: calc(-35 * var(--u));   top: calc(3375 * var(--u)); width: calc(667 * var(--u)); height: calc(955 * var(--u)); }
+    .ph-17 { left: calc(630 * var(--u));   top: calc(3376 * var(--u)); width: calc(787 * var(--u)); height: calc(954 * var(--u)); }
+
+    /* === Section 7: HAN KJOBENHAVEN 2024 (3 polaroids + 1 portrait) === */
+    .label-han { left: calc(26 * var(--u)); top: calc(4294 * var(--u)); }
+    .ph-18 { left: calc(-4 * var(--u));    top: calc(4333 * var(--u)); width: calc(302 * var(--u)); height: calc(346 * var(--u)); transform: rotate(-0.59deg); transform-origin: center; }
+    .ph-19 { left: calc(305 * var(--u));   top: calc(4324 * var(--u)); width: calc(298 * var(--u)); height: calc(361 * var(--u)); transform: rotate(1deg); transform-origin: center; }
+    .ph-20 { left: calc(640 * var(--u));   top: calc(4332 * var(--u)); width: calc(343 * var(--u)); height: calc(338 * var(--u)); transform: rotate(3.49deg); transform-origin: center; }
+    .ph-21 { left: calc(951 * var(--u));   top: calc(4332 * var(--u)); width: calc(329 * var(--u)); height: calc(400 * var(--u)); }
+
+    /* === Section 8: 2 squares === */
+    .ph-22 { left: 0;                      top: calc(4690 * var(--u)); width: calc(645 * var(--u)); height: calc(645 * var(--u)); }
+    .ph-23 { left: calc(646 * var(--u));   top: calc(4689 * var(--u)); width: calc(634 * var(--u)); height: calc(646 * var(--u)); }
+
+    /* === Section 9: 4 photos in row === */
+    .ph-24 { left: 0;                      top: calc(5335 * var(--u)); width: calc(340 * var(--u)); height: calc(358 * var(--u)); }
+    .ph-25 { left: calc(326 * var(--u));   top: calc(5335 * var(--u)); width: calc(344 * var(--u)); height: calc(419 * var(--u)); }
+    .ph-26 { left: calc(651 * var(--u));   top: calc(5353 * var(--u)); width: calc(322 * var(--u)); height: calc(391 * var(--u)); }
+    .ph-27 { left: calc(951 * var(--u));   top: calc(5335 * var(--u)); width: calc(344 * var(--u)); height: calc(419 * var(--u)); }
+
+    /* === Section 10: 2 wide photos === */
+    .ph-28 { left: 0;                      top: calc(5754 * var(--u)); width: calc(640 * var(--u)); height: calc(426 * var(--u)); }
+    .ph-29 { left: calc(631 * var(--u));   top: calc(5754 * var(--u)); width: calc(649 * var(--u)); height: calc(426 * var(--u)); }
+
+    /* === Section 11: BTS /PRALAYA 2024 (2 wide) === */
+    .label-pralaya { left: calc(1110 * var(--u)); top: calc(6571 * var(--u)); }
+    .ph-30 { left: 0;                      top: calc(6180 * var(--u)); width: calc(631 * var(--u)); height: calc(420 * var(--u)); }
+    .ph-31 { left: calc(631 * var(--u));   top: calc(6180 * var(--u)); width: calc(649 * var(--u)); height: calc(420 * var(--u)); }
+
+    /* === Section 12: 2 tall photos (one extends past frame) === */
+    .ph-32 { left: 0;                      top: calc(6600 * var(--u)); width: calc(631 * var(--u)); height: calc(1122 * var(--u)); }
+    .ph-33 { left: calc(610 * var(--u));   top: calc(6599 * var(--u)); width: calc(1370 * var(--u)); height: calc(1123 * var(--u)); }
+
+    .mobile-menu { display: none; }
+
+    @media (max-width: 700px) {
+      :root { --m: calc(min(100vw, 402px) / 402); }
+
+      body { background: #fff; }
+
+      .page {
+        width: calc(402 * var(--m));
+        height: calc(2477 * var(--m));
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .nav {
+        height: calc(62 * var(--m));
+        background: #fff;
+        z-index: 80;
+      }
+
+      .nav__divider { display: none; }
+
+      .nav__logo {
+        top: calc(8 * var(--m));
+        left: calc(18 * var(--m));
+        width: calc(36 * var(--m));
+        height: calc(46 * var(--m));
+      }
+
+      .nav a,
+      .nav span {
+        top: calc(22 * var(--m));
+        font-size: 17px;
+        line-height: 1;
+      }
+
+      .nav__home {
+        left: auto;
+        right: calc(18 * var(--m));
+      }
+
+      .nav__photography,
+      .nav__creative,
+      .nav__paint,
+      .nav__contact {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: block;
+        position: absolute;
+        top: calc(22 * var(--m));
+        left: calc(82 * var(--m));
+        z-index: 90;
+      }
+
+      .mobile-menu summary {
+        display: inline-block;
+        list-style: none;
+        color: #000ca9;
+        cursor: pointer;
+        font-size: 17px;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .mobile-menu summary::-webkit-details-marker { display: none; }
+
+      .mobile-menu summary span {
+        position: static;
+        top: auto;
+        color: inherit;
+        font-size: inherit;
+        line-height: inherit;
+      }
+
+      .mobile-menu__label-close { display: none; }
+      .mobile-menu[open] .mobile-menu__label-open { display: none; }
+      .mobile-menu[open] .mobile-menu__label-close { display: inline; }
+
+
+      .mobile-menu__panel {
+        position: fixed;
+        top: calc(62 * var(--m));
+        left: 0;
+        right: 0;
+        z-index: 85;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 17px 18px 19px;
+        background: #fff;
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        transform-origin: top;
+      }
+
+      .mobile-menu[open] .mobile-menu__panel {
+        animation: mobile-menu-slide-in 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      .mobile-menu.is-closing .mobile-menu__panel {
+        animation: mobile-menu-slide-out 180ms cubic-bezier(0.55, 0, 1, 0.45) both;
+      }
+
+      .mobile-menu__section {
+        display: grid;
+        gap: 10px;
+      }
+
+      .mobile-menu__section--work {
+        padding-top: 12px;
+        border-top: 1px solid #000;
+      }
+
+      .mobile-menu__panel .mobile-menu__eyebrow {
+        position: static;
+        top: auto;
+        display: block;
+        color: #000;
+        font-size: 12px;
+        line-height: 1;
+        letter-spacing: 0;
+        white-space: normal;
+      }
+
+      .mobile-menu__panel a {
+        position: static;
+        top: auto;
+        display: block;
+        color: #000;
+        font-size: 17px;
+        line-height: 1.05;
+        text-decoration: none;
+        white-space: normal;
+      }
+
+      .mobile-menu__section--primary a {
+        color: #000ca9;
+      }
+
+      .mobile-menu__panel a[aria-current="page"] {
+        color: transparent;
+        -webkit-text-stroke: 0.65px #000ca9;
+      }
+
+      .photo,
+      .photo-frame,
+      .label,
+      .footer-link {
+        translate: 0 calc(9 * var(--m));
+      }
+
+      @keyframes mobile-menu-slide-in {
+        from {
+          opacity: 0;
+          transform: translateY(-12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes mobile-menu-slide-out {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-12px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .mobile-menu[open] .mobile-menu__panel,
+        .mobile-menu.is-closing .mobile-menu__panel {
+          animation: none;
+        }
+      }
+
+      .footer-link { display: none; }
+
+      .label {
+        font-size: 5px;
+        line-height: 1.15;
+      }
+
+      .label-pitti,
+      .label-jordanluca,
+      .label-han {
+        display: none;
+      }
+
+      .ph-01 { left: 0; top: calc(53 * var(--m)); width: calc(101 * var(--m)); height: calc(107 * var(--m)); }
+      .ph-02 { left: calc(101 * var(--m)); top: calc(53 * var(--m)); width: calc(103 * var(--m)); height: calc(107 * var(--m)); }
+      .ph-03 { left: calc(204 * var(--m)); top: calc(53 * var(--m)); width: calc(103 * var(--m)); height: calc(107 * var(--m)); }
+      .ph-04 { left: calc(304 * var(--m)); top: calc(53 * var(--m)); width: calc(102 * var(--m)); height: calc(107 * var(--m)); }
+
+      .ph-05 { left: calc(-13 * var(--m)); top: calc(156 * var(--m)); width: calc(158 * var(--m)); height: calc(215 * var(--m)); }
+      .ph-06 { left: calc(144 * var(--m)); top: calc(156 * var(--m)); width: calc(155 * var(--m)); height: calc(214 * var(--m)); }
+      .ph-07 { left: calc(299 * var(--m)); top: calc(156 * var(--m)); width: calc(107 * var(--m)); height: calc(71 * var(--m)); }
+      .ph-08 { left: calc(299 * var(--m)); top: calc(227 * var(--m)); width: calc(108 * var(--m)); height: calc(72 * var(--m)); }
+      .ph-09 { left: calc(299 * var(--m)); top: calc(298 * var(--m)); width: calc(108 * var(--m)); height: calc(72 * var(--m)); }
+      .label-frederico { left: calc(348 * var(--m)); top: calc(219 * var(--m)); }
+
+      .ph-10 { left: calc(-18 * var(--m)); top: calc(370 * var(--m)); width: calc(425 * var(--m)); height: calc(243 * var(--m)); }
+
+      .ph-11 { left: calc(-7 * var(--m)); top: calc(613 * var(--m)); width: calc(134 * var(--m)); height: calc(200 * var(--m)); }
+      .ph-12 { left: calc(127 * var(--m)); top: calc(613 * var(--m)); width: calc(140 * var(--m)); height: calc(201 * var(--m)); }
+      .ph-13 { left: calc(268 * var(--m)); top: calc(613 * var(--m)); width: calc(134 * var(--m)); height: calc(201 * var(--m)); }
+
+      .ph-14 { left: calc(-3 * var(--m)); top: calc(814 * var(--m)); width: calc(198 * var(--m)); height: calc(298 * var(--m)); }
+      .ph-15 { left: calc(194 * var(--m)); top: calc(814 * var(--m)); width: calc(208 * var(--m)); height: calc(298 * var(--m)); }
+      .ph-16 { left: calc(-14 * var(--m)); top: calc(1112 * var(--m)); width: calc(208 * var(--m)); height: calc(298 * var(--m)); }
+      .ph-17 { left: calc(194 * var(--m)); top: calc(1112 * var(--m)); width: calc(246 * var(--m)); height: calc(298 * var(--m)); }
+
+      .ph-18 { left: 0; top: calc(1410 * var(--m)); width: calc(95 * var(--m)); height: calc(109 * var(--m)); transform: rotate(-0.59deg); }
+      .ph-19 { left: calc(92 * var(--m)); top: calc(1408 * var(--m)); width: calc(95 * var(--m)); height: calc(114 * var(--m)); transform: rotate(1deg); }
+      .ph-20 { left: calc(191 * var(--m)); top: calc(1410 * var(--m)); width: calc(113 * var(--m)); height: calc(112 * var(--m)); transform: rotate(3.49deg); }
+      .ph-21 { left: calc(297 * var(--m)); top: calc(1410 * var(--m)); width: calc(103 * var(--m)); height: calc(125 * var(--m)); }
+
+      .ph-22 { left: calc(-2 * var(--m)); top: calc(1519 * var(--m)); width: calc(207 * var(--m)); height: calc(207 * var(--m)); }
+      .ph-23 { left: calc(204 * var(--m)); top: calc(1519 * var(--m)); width: calc(199 * var(--m)); height: calc(203 * var(--m)); }
+
+      .ph-24 { left: calc(-2 * var(--m)); top: calc(1723 * var(--m)); width: calc(106 * var(--m)); height: calc(112 * var(--m)); }
+      .ph-25 { left: calc(99 * var(--m)); top: calc(1723 * var(--m)); width: calc(108 * var(--m)); height: calc(131 * var(--m)); }
+      .ph-26 { left: calc(201 * var(--m)); top: calc(1729 * var(--m)); width: calc(101 * var(--m)); height: calc(122 * var(--m)); }
+      .ph-27 { left: calc(294 * var(--m)); top: calc(1723 * var(--m)); width: calc(108 * var(--m)); height: calc(131 * var(--m)); }
+
+      .ph-28 { left: 0; top: calc(1854 * var(--m)); width: calc(201 * var(--m)); height: calc(134 * var(--m)); }
+      .ph-29 { left: calc(200 * var(--m)); top: calc(1854 * var(--m)); width: calc(202 * var(--m)); height: calc(132 * var(--m)); }
+
+      .ph-30 { left: 0; top: calc(1985 * var(--m)); width: calc(200 * var(--m)); height: calc(133 * var(--m)); }
+      .ph-31 { left: calc(200 * var(--m)); top: calc(1986 * var(--m)); width: calc(203 * var(--m)); height: calc(131 * var(--m)); }
+      .label-pralaya { left: calc(339 * var(--m)); top: calc(2108 * var(--m)); }
+
+      .ph-32 { left: calc(-7 * var(--m)); top: calc(2118 * var(--m)); width: calc(197 * var(--m)); height: calc(350 * var(--m)); }
+      .ph-33 { left: calc(182 * var(--m)); top: calc(2117 * var(--m)); width: calc(429 * var(--m)); height: calc(351 * var(--m)); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Navigation -->
+    <nav class="nav">
+      <img loading="lazy" class="nav__logo" src="img/logo.png" alt="">
+      <a class="nav__home" href="index.html">KRISHA DAVE</a>
+      <span class="nav__photography active" aria-current="page">PHOTOGRAPHY</span>
+      <a class="nav__creative" href="creative-direction.html">CREATIVE DIRECTION</a>
+      <a class="nav__paint" href="paint.html">PAINT</a>
+      <a class="nav__contact" href="contact.html">CONTACT</a>
+      <div class="nav__divider"></div>
+      <details class="mobile-menu">
+        <summary><span class="mobile-menu__label-open">MENU</span><span class="mobile-menu__label-close">CLOSE</span></summary>
+        <div class="mobile-menu__panel">
+          <div class="mobile-menu__section mobile-menu__section--primary">
+            <a href="index.html">HOME</a>
+            <a href="photography.html" aria-current="page">PHOTOGRAPHY</a>
+            <a href="creative-direction.html">CREATIVE DIRECTION</a>
+            <a href="paint.html">PAINT</a>
+            <a href="contact.html">CONTACT</a>
+          </div>
+          <div class="mobile-menu__section mobile-menu__section--work">
+            <span class="mobile-menu__eyebrow">SELECTED WORK</span>
+            <a href="pralaya-2024.html">PRALAYA 2024</a>
+            <a href="wardi-2025.html">WARDI 2025</a>
+            <a href="ahlan-2023.html">AHLAN 2023</a>
+            <a href="talisman-2026.html">TALISMAN 2026</a>
+            <a href="security-magazine-2025.html">SECURITY MAGAZINE 2025</a>
+            <a href="when-will-you-free-me-2026.html">WHEN WILL YOU FREE ME? 2026</a>
+          </div>
+        </div>
+      </details>
+    </nav>
+
+    <!-- Section 1: FREDERICO CINA 2024 (zoom-cropped to hide polaroid borders) -->
+    <div class="photo-frame ph-01"><img src="img/p04.jpg" alt="" style="width:116.75%;height:138.88%;left:-8.57%;top:-8.08%;"></div>
+    <div class="photo-frame ph-02"><img src="img/p03.jpg" alt="" style="width:115.7%;height:134.39%;left:-7.85%;top:-8.08%;"></div>
+    <div class="photo-frame ph-03"><img src="img/p01.jpg" alt="" style="width:115%;height:135.22%;left:-7%;top:-8.15%;"></div>
+    <div class="photo-frame ph-04"><img src="img/p02.jpg" alt="" style="width:114.71%;height:133.12%;left:-6.31%;top:-8.11%;"></div>
+    <span class="label label-frederico">FREDERICO CINA 2024</span>
+
+    <!-- Section 2 -->
+    <img loading="lazy" class="photo ph-05" src="img/p06.jpg" alt="">
+    <img loading="lazy" class="photo ph-06" src="img/p05.jpg" alt="">
+    <img loading="lazy" class="photo ph-07" src="img/p07.jpg" alt="">
+    <img loading="lazy" class="photo ph-08" src="img/p09.jpg" alt="">
+    <img loading="lazy" class="photo ph-09" src="img/p08.jpg" alt="">
+
+    <!-- Section 3 -->
+    <img loading="lazy" class="photo ph-10" src="img/p10.jpg" alt="">
+
+    <!-- Section 4: PITTI UOMO 2024 -->
+    <span class="label label-pitti">PITTI UOMO 2024</span>
+    <img loading="lazy" class="photo ph-11" src="img/p11.jpg" alt="">
+    <img loading="lazy" class="photo ph-12" src="img/p12.jpg" alt="">
+    <img loading="lazy" class="photo ph-13" src="img/p13.jpg" alt="">
+
+    <!-- Section 5: JORDANLUCA 2025 -->
+    <span class="label label-jordanluca">JORDANLUCA 2025</span>
+    <img loading="lazy" class="photo ph-14" src="img/p14.jpg" alt="">
+    <div class="photo-frame ph-15"><img loading="lazy" src="img/p15.jpg" alt="" style="width:115.1%;height:173.6%;left:-7.5%;top:-27.2%;"></div>
+
+    <!-- Section 6 -->
+    <div class="photo-frame ph-16"><img loading="lazy" src="img/p17.jpg" alt="" style="width:115.1%;height:173.6%;left:-7.5%;top:-27.2%;"></div>
+    <div class="photo-frame ph-17"><img loading="lazy" src="img/p16.jpg" alt="" style="width:115.1%;height:173.6%;left:-7.5%;top:-27.2%;"></div>
+
+    <!-- Section 7: HAN KJOBENHAVEN 2024 -->
+    <span class="label label-han">HAN KJOBENHAVEN 2024</span>
+    <img loading="lazy" class="photo ph-18" src="img/p22.jpg" alt="">
+    <img loading="lazy" class="photo ph-19" src="img/p20.jpg" alt="">
+    <img loading="lazy" class="photo ph-20" src="img/p21.jpg" alt="">
+    <img loading="lazy" class="photo ph-21" src="img/p26.jpg" alt="">
+
+    <!-- Section 8 -->
+    <img loading="lazy" class="photo ph-22" src="img/p19.jpg" alt="">
+    <img loading="lazy" class="photo ph-23" src="img/p33.jpg" alt="">
+
+    <!-- Section 9 -->
+    <img loading="lazy" class="photo ph-24" src="img/p23.jpg" alt="">
+    <img loading="lazy" class="photo ph-25" src="img/p24.jpg" alt="">
+    <img loading="lazy" class="photo ph-26" src="img/p18.jpg" alt="">
+    <img loading="lazy" class="photo ph-27" src="img/p25.jpg" alt="">
+
+    <!-- Section 10 -->
+    <img loading="lazy" class="photo ph-28" src="img/p28.jpg" alt="">
+    <img loading="lazy" class="photo ph-29" src="img/p27.jpg" alt="">
+
+    <!-- Section 11: BTS /PRALAYA 2024 -->
+    <span class="label label-pralaya">BTS /PRALAYA 2024</span>
+    <img loading="lazy" class="photo ph-30" src="img/p29.jpg" alt="">
+    <img loading="lazy" class="photo ph-31" src="img/p30.jpg" alt="">
+
+    <!-- Section 12 -->
+    <img loading="lazy" class="photo ph-32" src="img/p31.jpg" alt="">
+    <img loading="lazy" class="photo ph-33" src="img/p32.jpg" alt="">
+
+    <!-- Footer link -->
+    <a class="footer-link" href="creative-direction.html">CREATIVE DIRECTION&gt;</a>
+  </div>
+  <script src="mobile-menu.js"></script>
+  <script src="cursor.js"></script>
+</body>
+</html>
