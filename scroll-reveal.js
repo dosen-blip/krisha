@@ -19,6 +19,12 @@
     element.style.setProperty('--reveal-delay', `${(index % 4) * 42}ms`);
   });
 
+  media.forEach(function (element) {
+    if (element.getBoundingClientRect().top <= window.innerHeight * 1.2) {
+      element.classList.add('is-visible');
+    }
+  });
+
   if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     media.forEach(function (element) {
       element.classList.add('is-visible');
@@ -37,12 +43,14 @@
     },
     {
       root: null,
-      rootMargin: '0px 0px -6% 0px',
-      threshold: 0.04
+      rootMargin: '0px 0px 18% 0px',
+      threshold: 0.01
     }
   );
 
   media.forEach(function (element) {
-    observer.observe(element);
+    if (!element.classList.contains('is-visible')) {
+      observer.observe(element);
+    }
   });
 })();

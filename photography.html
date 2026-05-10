@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="cursor.css">
   <link rel="stylesheet" href="scroll-reveal.css">
   <script src="page-sounds.js"></script>
-  <script src="scroll-reveal.js" defer></script>
+  <script src="scroll-reveal.js?v=2" defer></script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -197,14 +197,15 @@
     .mobile-menu { display: none; }
 
     @media (max-width: 700px) {
-      :root { --m: calc(min(100vw, 402px) / 402); }
+      :root { --m: calc(100vw / 402); }
 
       body { background: #fff; }
 
       .page {
-        width: calc(402 * var(--m));
+        width: 100vw;
         height: calc(2477 * var(--m));
         min-height: 100vh;
+        margin: 0;
         overflow: hidden;
       }
 
@@ -480,59 +481,59 @@
     <span class="label label-frederico">FREDERICO CINA 2024</span>
 
     <!-- Section 2 -->
-    <img loading="lazy" class="photo ph-05" src="img/p06.jpg" alt="">
-    <img loading="lazy" class="photo ph-06" src="img/p05.jpg" alt="">
-    <img loading="lazy" class="photo ph-07" src="img/p07.jpg" alt="">
-    <img loading="lazy" class="photo ph-08" src="img/p09.jpg" alt="">
-    <img loading="lazy" class="photo ph-09" src="img/p08.jpg" alt="">
+    <img class="photo ph-05" src="img/p06.jpg" alt="">
+    <img class="photo ph-06" src="img/p05.jpg" alt="">
+    <img class="photo ph-07" src="img/p07.jpg" alt="">
+    <img class="photo ph-08" src="img/p09.jpg" alt="">
+    <img class="photo ph-09" src="img/p08.jpg" alt="">
 
     <!-- Section 3 -->
-    <img loading="lazy" class="photo ph-10" src="img/p10.jpg" alt="">
+    <img class="photo ph-10" src="img/p10.jpg" alt="">
 
     <!-- Section 4: PITTI UOMO 2024 -->
     <span class="label label-pitti">PITTI UOMO 2024</span>
-    <img loading="lazy" class="photo ph-11" src="img/p11.jpg" alt="">
-    <img loading="lazy" class="photo ph-12" src="img/p12.jpg" alt="">
-    <img loading="lazy" class="photo ph-13" src="img/p13.jpg" alt="">
+    <img class="photo ph-11" src="img/p11.jpg" alt="">
+    <img class="photo ph-12" src="img/p12.jpg" alt="">
+    <img class="photo ph-13" src="img/p13.jpg" alt="">
 
     <!-- Section 5: JORDANLUCA 2025 -->
     <span class="label label-jordanluca">JORDANLUCA 2025</span>
-    <img loading="lazy" class="photo ph-14" src="img/p14.jpg" alt="">
-    <div class="photo-frame ph-15"><img loading="lazy" src="img/p15.jpg" alt="" style="width:115.1%;height:173.6%;left:-7.5%;top:-27.2%;"></div>
+    <img class="photo ph-14" src="img/p14.jpg" alt="">
+    <div class="photo-frame ph-15"><img src="img/p15.jpg" alt="" style="width:115.1%;height:173.6%;left:-7.5%;top:-27.2%;"></div>
 
     <!-- Section 6 -->
-    <div class="photo-frame ph-16"><img loading="lazy" src="img/p17.jpg" alt="" style="width:115.1%;height:173.6%;left:-7.5%;top:-27.2%;"></div>
-    <div class="photo-frame ph-17"><img loading="lazy" src="img/p16.jpg" alt="" style="width:115.1%;height:173.6%;left:-7.5%;top:-27.2%;"></div>
+    <div class="photo-frame ph-16"><img src="img/p17.jpg" alt="" style="width:115.1%;height:173.6%;left:-7.5%;top:-27.2%;"></div>
+    <div class="photo-frame ph-17"><img src="img/p16.jpg" alt="" style="width:115.1%;height:173.6%;left:-7.5%;top:-27.2%;"></div>
 
     <!-- Section 7: HAN KJOBENHAVEN 2024 -->
     <span class="label label-han">HAN KJOBENHAVEN 2024</span>
-    <img loading="lazy" class="photo ph-18" src="img/p22.jpg" alt="">
-    <img loading="lazy" class="photo ph-19" src="img/p20.jpg" alt="">
-    <img loading="lazy" class="photo ph-20" src="img/p21.jpg" alt="">
-    <img loading="lazy" class="photo ph-21" src="img/p26.jpg" alt="">
+    <img class="photo ph-18" src="img/p22.jpg" alt="">
+    <img class="photo ph-19" src="img/p20.jpg" alt="">
+    <img class="photo ph-20" src="img/p21.jpg" alt="">
+    <img class="photo ph-21" src="img/p26.jpg" alt="">
 
     <!-- Section 8 -->
-    <img loading="lazy" class="photo ph-22" src="img/p19.jpg" alt="">
-    <img loading="lazy" class="photo ph-23" src="img/p33.jpg" alt="">
+    <img class="photo ph-22" src="img/p19.jpg" alt="">
+    <img class="photo ph-23" src="img/p33.jpg" alt="">
 
     <!-- Section 9 -->
-    <img loading="lazy" class="photo ph-24" src="img/p23.jpg" alt="">
-    <img loading="lazy" class="photo ph-25" src="img/p24.jpg" alt="">
-    <img loading="lazy" class="photo ph-26" src="img/p18.jpg" alt="">
-    <img loading="lazy" class="photo ph-27" src="img/p25.jpg" alt="">
+    <img class="photo ph-24" src="img/p23.jpg" alt="">
+    <img class="photo ph-25" src="img/p24.jpg" alt="">
+    <img class="photo ph-26" src="img/p18.jpg" alt="">
+    <img class="photo ph-27" src="img/p25.jpg" alt="">
 
     <!-- Section 10 -->
-    <img loading="lazy" class="photo ph-28" src="img/p28.jpg" alt="">
-    <img loading="lazy" class="photo ph-29" src="img/p27.jpg" alt="">
+    <img class="photo ph-28" src="img/p28.jpg" alt="">
+    <img class="photo ph-29" src="img/p27.jpg" alt="">
 
     <!-- Section 11: BTS /PRALAYA 2024 -->
     <span class="label label-pralaya">BTS /PRALAYA 2024</span>
-    <img loading="lazy" class="photo ph-30" src="img/p29.jpg" alt="">
-    <img loading="lazy" class="photo ph-31" src="img/p30.jpg" alt="">
+    <img class="photo ph-30" src="img/p29.jpg" alt="">
+    <img class="photo ph-31" src="img/p30.jpg" alt="">
 
     <!-- Section 12 -->
-    <img loading="lazy" class="photo ph-32" src="img/p31.jpg" alt="">
-    <img loading="lazy" class="photo ph-33" src="img/p32.jpg" alt="">
+    <img class="photo ph-32" src="img/p31.jpg" alt="">
+    <img class="photo ph-33" src="img/p32.jpg" alt="">
 
     <!-- Footer link -->
     <a class="footer-link" href="creative-direction.html">CREATIVE DIRECTION&gt;</a>

@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="cursor.css">
   <link rel="stylesheet" href="scroll-reveal.css">
   <script src="page-sounds.js"></script>
-  <script src="scroll-reveal.js" defer></script>
+  <script src="scroll-reveal.js?v=2" defer></script>
   <style>
     *, *::before, *::after {
       margin: 0;
@@ -204,17 +204,42 @@
     const landingVideo = document.querySelector('.hero__bg');
 
     if (landingVideo) {
+      landingVideo.defaultMuted = false;
       landingVideo.muted = false;
       landingVideo.volume = 1;
 
-      const playLandingVideo = () => {
+      const startLandingVideo = () => {
+        landingVideo.defaultMuted = false;
         landingVideo.muted = false;
-        landingVideo.play().catch(() => {});
+        landingVideo.volume = 1;
+
+        const playPromise = landingVideo.play();
+        if (playPromise) {
+          playPromise.catch(() => {
+            landingVideo.defaultMuted = true;
+            landingVideo.muted = true;
+            landingVideo.play().catch(() => {});
+          });
+        }
       };
 
-      landingVideo.addEventListener('loadeddata', playLandingVideo, { once: true });
-      window.addEventListener('pointerdown', playLandingVideo, { once: true });
-      window.addEventListener('keydown', playLandingVideo, { once: true });
+      const enableLandingAudio = () => {
+        landingVideo.defaultMuted = false;
+        landingVideo.muted = false;
+        landingVideo.volume = 1;
+        startLandingVideo();
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startLandingVideo, { once: true });
+      } else {
+        startLandingVideo();
+      }
+
+      landingVideo.addEventListener('loadedmetadata', startLandingVideo, { once: true });
+      landingVideo.addEventListener('canplay', startLandingVideo, { once: true });
+      window.addEventListener('pointerdown', enableLandingAudio, { once: true });
+      window.addEventListener('keydown', enableLandingAudio, { once: true });
     }
   </script>
   <script src="cursor.js"></script>
