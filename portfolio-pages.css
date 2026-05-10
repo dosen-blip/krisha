@@ -229,8 +229,8 @@ a.text[class*="cd-label-"]:hover {
 
 .security-logo {
   position: absolute;
-  left: calc(-83 * var(--u));
-  top: calc(80.946 * var(--u));
+  left: calc(12 * var(--u));
+  top: calc(-24 * var(--u));
   width: calc(288.758 * var(--u));
   height: calc(288.758 * var(--u));
   display: flex;
@@ -258,9 +258,9 @@ a.text[class*="cd-label-"]:hover {
 .security-09 img { left: calc(-56.68 * var(--u)); top: calc(0.13 * var(--u)); width: calc(440.76 * var(--u)); height: calc(659.72 * var(--u)); }
 .security-10 { left: calc(14 * var(--u)); top: calc(1442 * var(--u)); width: calc(423 * var(--u)); height: calc(635 * var(--u)); }
 .security-copy {
-  left: calc(16 * var(--u));
-  top: calc(395 * var(--u));
-  width: calc(325 * var(--u));
+  left: calc(32 * var(--u));
+  top: calc(204 * var(--u));
+  width: calc(285 * var(--u));
   --fs: 15;
   line-height: normal;
   white-space: normal;
@@ -712,6 +712,56 @@ a.text[class*="cd-label-"]:hover {
   .mcr-security-8 { left: calc(276 * var(--m));  top: calc(3780 * var(--m)); width: calc(119 * var(--m)); height: calc(79 * var(--m)); }
   .mcr-security-9 { left: calc(277 * var(--m));  top: calc(3862 * var(--m)); width: calc(118 * var(--m)); height: calc(203 * var(--m)); }
   .mcr-security-10 { left: calc(10 * var(--m));  top: calc(3870 * var(--m)); width: calc(130 * var(--m)); height: calc(195 * var(--m)); }
+
+  .mcr-security-2 img {
+    position: absolute;
+    left: -97.8%;
+    top: -76.79%;
+    width: 231.19%;
+    height: 254.31%;
+    max-width: none;
+    object-fit: fill;
+  }
+
+  .mcr-security-3 img {
+    position: absolute;
+    left: -0.24%;
+    top: 0;
+    width: 198.95%;
+    height: 100%;
+    max-width: none;
+    object-fit: fill;
+  }
+
+  .mcr-security-4 img {
+    position: absolute;
+    left: -95.71%;
+    top: 0;
+    width: 195.95%;
+    height: 100%;
+    max-width: none;
+    object-fit: fill;
+  }
+
+  .mcr-security-6 img {
+    position: absolute;
+    left: -0.07%;
+    top: -67.22%;
+    width: 100.14%;
+    height: 234.85%;
+    max-width: none;
+    object-fit: fill;
+  }
+
+  .mcr-security-9 img {
+    position: absolute;
+    left: -14.76%;
+    top: 0.02%;
+    width: 114.78%;
+    height: 100.11%;
+    max-width: none;
+    object-fit: fill;
+  }
 
   .mcr-paint-link {
     left: calc(330 * var(--m));
