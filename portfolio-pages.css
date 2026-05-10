@@ -510,6 +510,11 @@ a.text[class*="cd-label-"]:hover {
     color: #000ca9;
   }
 
+  .mobile-menu__panel a[aria-current="page"] {
+    color: transparent;
+    -webkit-text-stroke: 0.65px #000ca9;
+  }
+
   @keyframes mobile-menu-slide-in {
     from {
       opacity: 0;
@@ -540,7 +545,12 @@ a.text[class*="cd-label-"]:hover {
   }
 
   .creative-page > .nav {
-    display: none;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 100;
   }
 
   .creative-page {
@@ -563,6 +573,11 @@ a.text[class*="cd-label-"]:hover {
     margin: 0 auto;
     overflow: hidden;
     background: #fff;
+  }
+
+  .creative-page .mcr-site-logo,
+  .creative-page .mcr-site-name {
+    display: none;
   }
 
   .mcr {
