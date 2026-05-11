@@ -365,7 +365,7 @@ a.text[class*="cd-label-"]:hover {
 
 @media (max-width: 700px) {
   :root {
-    --m: calc(min(100vw, 402px) / 402);
+    --m: calc(100vw / 402);
   }
 
   html,
@@ -374,10 +374,10 @@ a.text[class*="cd-label-"]:hover {
   }
 
   .page {
-    width: calc(402 * var(--m));
-    max-width: 402px;
+    width: 100vw;
+    max-width: none;
     min-height: 100vh;
-    margin: 0 auto;
+    margin: 0;
     overflow: visible;
   }
 
@@ -491,22 +491,6 @@ a.text[class*="cd-label-"]:hover {
     gap: 10px;
   }
 
-  .mobile-menu__section--work {
-    padding-top: 12px;
-    border-top: 1px solid #000;
-  }
-
-  .mobile-menu__panel .mobile-menu__eyebrow {
-    position: static;
-    top: auto;
-    display: block;
-    color: #000;
-    font-size: 12px;
-    line-height: 1;
-    letter-spacing: 0;
-    white-space: normal;
-  }
-
   .mobile-menu__panel a {
     position: static;
     top: auto;
@@ -563,10 +547,6 @@ a.text[class*="cd-label-"]:hover {
     left: 0;
     width: 100vw;
     z-index: 100;
-  }
-
-  .creative-page .mobile-menu__section--work {
-    display: none;
   }
 
   .creative-page {
@@ -1083,5 +1063,14 @@ a.text[class*="cd-label-"]:hover {
     left: calc(319 * var(--m));
     top: calc(898 * var(--m));
     font-size: calc(17 * var(--m));
+  }
+
+  @media (max-width: 480px) {
+    .contact-page {
+      --m: calc(100vw / 402);
+      width: 100vw;
+      max-width: none;
+      margin: 0;
+    }
   }
 }
