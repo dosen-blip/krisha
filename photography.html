@@ -122,10 +122,13 @@
       position: absolute;
       left: calc(1012 * var(--u));
       top: calc(7673 * var(--u));
+      display: inline-block;
+      padding: 0.08em 0.22em;
+      background: rgba(217, 217, 217, 0.6);
       font-family: 'Pixelify Sans', sans-serif;
       font-size: calc(24 * var(--u));
       color: #0900ff;
-      line-height: 1.2;
+      line-height: 1;
       text-decoration: none;
       cursor: pointer;
       transition: opacity 0.2s;
@@ -203,7 +206,7 @@
 
       .page {
         width: 100vw;
-        height: calc(2477 * var(--m));
+        height: calc(2520 * var(--m));
         min-height: 100vh;
         margin: 0;
         overflow: hidden;
@@ -377,7 +380,13 @@
         }
       }
 
-      .footer-link { display: none; }
+      .footer-link {
+        display: inline-block;
+        left: calc(258 * var(--m));
+        top: calc(2478 * var(--m));
+        z-index: 30;
+        font-size: calc(11 * var(--m));
+      }
 
       .label {
         font-size: 5px;
