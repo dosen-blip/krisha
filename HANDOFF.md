@@ -1,6 +1,6 @@
 # KRISHA — handoff
 
-Status as of 2026-11-25. **Nothing is committed.** Everything below is uncommitted work on `main` on top of `699dccb` ("final final final"). The site is static and has no build step; run it with the `krisha-site` entry in `.claude/launch.json` (`python3 -m http.server 3456`).
+Status as of 2026-11-25. Everything below is committed on `main` (`5dca0b4`) and live at https://krishadave.com. GitHub Pages deploys `main` automatically (`.github/workflows/static.yml`). The site is static and has no build step; run it with the `krisha-site` entry in `.claude/launch.json` (`python3 -m http.server 3456`).
 
 Read this file first, then `fx/README.md`, which holds the effects-layer contracts: module API, events, z-index and cache-busting.
 
@@ -78,4 +78,3 @@ Other shared files carry their own `?v=`: `scroll-reveal.js` v4, `scroll-reveal.
    - On DPR-3 phones, GL is capped at DPR 2.
    - Chrome and iOS both show the KRISHA.EXE dialog (Chrome now also exposes `requestPermission`).
 8. **Small refactor:** `transitions.js` `growFigureFor` only morphs `a.figure`. `m-reel.js` exists only to add `.figure` to the tapped hero.
-9. **Commit:** nothing is committed yet. Suggest a feature branch; the new pages are `security-issue-00/01.html`; the new assets add about 37 MB (book pages + videos + scans).
