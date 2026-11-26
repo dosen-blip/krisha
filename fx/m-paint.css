@@ -1,0 +1,291 @@
+/* fx/m-paint.css — Paint page, phone layer (fx/m-paint.js GL, fx/paint-lite.js phone viewer without GL). See fx/README.md.
+   Everything here is phone-only: the gallery rules are scoped under html.fx-phone, the viewer only exists on phones. */
+
+/* ---------------------------------------------------------------- gallery (GL) */
+/* The sliding canvas window lives inside the gallery so it scrolls with the page (no drift against the DOM). */
+html.fx-phone .mobile-paint-gallery.fx-mpaint-gallery {
+  position: relative;
+}
+
+html.fx-phone .fx-mpaint-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+html.fx-phone .fx-mpaint-layer > canvas {
+  position: absolute;
+  inset: 0;
+}
+
+/* an image the canvas has drawn (and fully covers) steps aside; a lifted work is in the viewer */
+html.fx-phone .mobile-paint-gallery img[data-fx-gl="drawn"],
+html.fx-phone .mobile-paint-gallery .fx-mpaint-lifted img {
+  visibility: hidden;
+}
+
+html.fx-phone .mobile-paint-gallery figure[role="button"] {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html.fx-phone .mobile-paint-gallery figure[role="button"]:focus-visible {
+  outline: 2px solid var(--fx-ink-bright, #0900ff);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------- viewer */
+/* Above the sticky phone nav (z 80) and its menu, below page transitions (z 100). */
+.fx-mpaint {
+  --fx-mpaint-m: calc(100vw / 402);
+  position: fixed;
+  inset: 0;
+  z-index: 92;
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: contain;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Pixelify Sans', sans-serif;
+  color: #000;
+}
+
+.fx-mpaint[hidden] { display: none; }
+
+.fx-mpaint__view,
+.fx-mpaint__rects {
+  position: absolute;
+  inset: 0;
+}
+
+.fx-mpaint__rects { pointer-events: none; z-index: 3; }
+
+.fx-mpaint__view > canvas {
+  position: absolute;
+  inset: 0;
+}
+
+/* Win98 zoom rectangle (same as fx/transitions.css) */
+.fx-mpaint__rect {
+  position: absolute;
+  display: none;
+  box-sizing: border-box;
+  border: 1px solid var(--fx-ink, #000ca9);
+}
+
+/* ---- title bar: < 3/9 >   [400%]   CLOSE — same height and type as the phone nav it covers */
+.fx-mpaint__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: calc(62 * var(--fx-mpaint-m));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 calc(10 * var(--fx-mpaint-m)) 0 calc(8 * var(--fx-mpaint-m));
+  box-sizing: border-box;
+  background: #fff;
+  visibility: hidden;
+}
+
+.fx-mpaint__nav {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.fx-mpaint button {
+  font: inherit;
+  color: var(--fx-ink, #000ca9);
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.fx-mpaint__prev,
+.fx-mpaint__next,
+.fx-mpaint__close {
+  min-width: 40px;
+  min-height: 44px;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.fx-mpaint__close { padding: 0 8px; }
+
+.fx-mpaint__count {
+  min-width: 3.2em;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1;
+  color: var(--fx-ink, #000ca9);
+}
+
+.fx-mpaint button:active { transform: translate(1px, 1px); }
+
+.fx-mpaint button:focus-visible {
+  outline: 2px solid var(--fx-ink-bright, #0900ff);
+  outline-offset: -2px;
+}
+
+/* the magnifier readout: a Win tooltip (white box, 1px ink border, hard offset shadow) */
+.fx-mpaint__zoom {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3px 6px 2px;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--fx-ink, #000ca9);
+  background: #fff;
+  border: 1px solid var(--fx-ink, #000ca9);
+  box-shadow: 2px 2px 0 var(--fx-ink, #000ca9);
+  pointer-events: none;
+}
+
+.fx-mpaint__zoom.is-mag {
+  color: #fff;
+  background: var(--fx-ink, #000ca9);
+}
+
+/* ---- caption: typed in, held to a fixed height so the painting area never jumps between works */
+.fx-mpaint__cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: auto;
+  bottom: 0;
+  z-index: 2;
+  padding: 10px 16px 4px;
+  text-align: center;
+  background: #fff;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.fx-mpaint__lines {
+  min-height: 56px;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.fx-mpaint__title {
+  color: var(--fx-ink, #000ca9);
+  font-size: 15px;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.fx-mpaint__caret {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.9em;
+  margin-left: 0.08em;
+  vertical-align: -0.08em;
+  background: var(--fx-ink, #000ca9);
+}
+
+.fx-mpaint__hint {
+  margin: 8px 0 0;
+  font-size: 10px;
+  line-height: 1.2;
+  color: var(--fx-ink, #000ca9);
+  opacity: 0.55;
+}
+
+.fx-mpaint.is-chrome .fx-mpaint__bar,
+.fx-mpaint.is-chrome .fx-mpaint__cap {
+  visibility: visible;
+}
+
+.fx-mpaint.is-chrome.is-dragging .fx-mpaint__bar,
+.fx-mpaint.is-chrome.is-dragging .fx-mpaint__cap {
+  visibility: hidden;
+}
+
+.fx-mpaint.is-chrome.is-mag .fx-mpaint__cap { visibility: hidden; }
+
+.fx-mpaint__sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* the KRISHA.EXE motion dialog (fx/m-motion.js, z 70) is asked from inside the viewer: lift it above */
+html[data-fx-modal="m-paint"] .fx-m-dialog {
+  z-index: 96;
+}
+
+/* ---------------------------------------------------------------- viewer without GL (fx/paint-lite.js) */
+.fx-mpaint__veil {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  display: none;
+  -webkit-mask-size: calc(4 * 3px) calc(4 * 3px);
+  mask-size: calc(4 * 3px) calc(4 * 3px);
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+}
+
+.fx-mpaint__item {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  -webkit-mask-size: calc(4 * 3px) calc(4 * 3px);
+  mask-size: calc(4 * 3px) calc(4 * 3px);
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+}
+
+.fx-mpaint__pn {
+  position: absolute;
+  overflow: hidden;
+  background: #f4f1ea;
+}
+
+.fx-mpaint__pn > img,
+.fx-mpaint__pn > canvas {
+  position: absolute;
+  display: block;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+}
+
+.fx-mpaint__pn > [hidden],
+.fx-mpaint__pn[hidden],
+.fx-mpaint__item[hidden] { display: none; }
+
+.fx-mpaint__pn > canvas {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+.fx-mpaint__pn.is-nearest > img {
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}

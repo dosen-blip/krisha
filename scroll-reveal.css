@@ -1,27 +1,33 @@
+/* scroll-reveal.js: the collage loads "interlaced" (coarse pixel blocks refining in hard steps). No fades, no slides. */
+
 @media (prefers-reduced-motion: no-preference) {
-  .reveal-media {
+  /* Held back until its turn. Opacity (not visibility) so links stay focusable and the fx layers that follow a
+     figure's opacity (fx/paint.js) agree with the DOM. No transition: it appears in one step, already pixelated. */
+  .reveal-media:not(.is-refining):not(.is-visible) {
     opacity: 0;
-    translate: 0 clamp(7px, 1.35vw, 18px);
-    filter: saturate(0.96) contrast(0.99);
-    transition:
-      opacity 980ms cubic-bezier(0.16, 1, 0.3, 1),
-      translate 1160ms cubic-bezier(0.16, 1, 0.3, 1),
-      filter 1160ms cubic-bezier(0.16, 1, 0.3, 1);
-    transition-delay: var(--reveal-delay, 0ms);
-    will-change: opacity, translate, filter;
   }
 
-  .reveal-media.is-visible {
-    opacity: 1;
-    translate: 0 0;
-    filter: none;
+  /* Arriving through a page transition: hold the collage from the very first paint, before scroll-reveal.js has run
+     (a grow transition has no cover). If the script never runs, this failsafe shows everything after 1.6s. */
+  html.fx-tx-grow :is(.photo, .photo-frame, .figure, .security-logo, .mobile-project-card__image, .mobile-paint-gallery figure):not(.reveal-media),
+  html.fx-tx-cover :is(.photo, .photo-frame, .figure, .security-logo, .mobile-project-card__image, .mobile-paint-gallery figure):not(.reveal-media) {
+    opacity: 0;
+    animation: reveal-failsafe 0s linear 1.6s forwards;
   }
 }
 
+@keyframes reveal-failsafe {
+  to { opacity: 1; }
+}
+
+/* A refining image's pixel layer: a block-resolution canvas stretched over it (the script positions and sizes it). */
+.reveal-pixels {
+  display: block;
+  pointer-events: none;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal-media {
-    opacity: 1;
-    translate: 0 0;
-    filter: none;
-  }
+  .reveal-pixels { display: none; }
 }

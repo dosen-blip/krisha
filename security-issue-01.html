@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="fx/prepaint.js"></script>
+  <title>Krisha Dave - SECURITY ISSUE 01, THE BOOTLEG ISSUE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+  <script src="cursor-boot.js?v=2"></script>
+  <link rel="stylesheet" href="cursor.css?v=3">
+  <link rel="stylesheet" href="scroll-reveal.css?v=2">
+  <script src="page-sounds.js?v=2"></script>
+  <script src="scroll-reveal.js?v=4" defer></script>
+  <link rel="stylesheet" href="portfolio-pages.css?v=10">
+  <!-- fx layer (see fx/README.md) -->
+  <link rel="stylesheet" href="fx/fx.css">
+  <link rel="stylesheet" href="fx/transitions.css?v=3">
+  <link rel="stylesheet" href="fx/ring.css">
+  <link rel="stylesheet" href="fx/m-shell.css">
+  <link rel="stylesheet" href="fx/security.css">
+  <link rel="stylesheet" href="fx/m-security.css">
+  <script type="importmap">
+    { "imports": {
+      "three": "./vendor/three/build/three.module.min.js",
+      "three/addons/": "./vendor/three/examples/jsm/"
+    } }
+  </script>
+  <script type="module" src="fx/boot.js?v=4"></script>
+</head>
+<body>
+  <div class="page security-page security-issue-page">
+    <nav class="nav" aria-label="Primary">
+      <img class="nav__logo" src="img-webp/logo.webp" alt="">
+      <a class="nav__home" href="index.html">KRISHA DAVE</a>
+      <a class="nav__photography" href="photography.html">PHOTOGRAPHY</a>
+      <a class="nav__creative active" href="creative-direction.html">CREATIVE DIRECTION</a>
+      <a class="nav__paint" href="paint.html">PAINT</a>
+      <a class="nav__contact" href="contact.html">CONTACT</a>
+      <div class="nav__divider"></div>
+      <details class="mobile-menu">
+        <summary><span class="mobile-menu__label-open">MENU</span><span class="mobile-menu__label-close">CLOSE</span></summary>
+        <div class="mobile-menu__panel">
+          <div class="mobile-menu__section mobile-menu__section--primary">
+            <a href="index.html">HOME</a>
+            <a href="photography.html">PHOTOGRAPHY</a>
+            <a href="creative-direction.html">CREATIVE DIRECTION</a>
+            <a href="paint.html">PAINT</a>
+            <a href="contact.html">CONTACT</a>
+          </div>
+        </div>
+      </details>
+    </nav>
+
+    <a class="text sec-back" href="security-magazine-2025.html">&lt; SECURITY MAGAZINE</a>
+
+    <!-- ISSUE 01: the readable 3D magazine (cover / READ open fx/flipbook.js, fx/m-flipbook.js) + the flip-through film -->
+    <section class="sec-issue sec-issue--01" aria-labelledby="sec-issue-title">
+      <h1 class="text sec-issue__title" id="sec-issue-title"><span class="sec-issue__no">ISSUE 01</span><span class="sec-issue__name">THE BOOTLEG ISSUE</span><span class="sec-issue__meta">SECURITY MAGAZINE &middot; 2026 &middot; 88 PAGES</span></h1>
+      <p class="text sec-issue__copy">The second issue of Security: more bootlegs, more hidden histories. Parody, copies and workarounds, things made without permission, and the stories that travel with them.</p>
+      <div class="figure fill sec-issue__cover"><img src="img-webp/security-01-cover.webp" alt="Security Issue 01 cover"></div>
+      <div class="text sec-issue__contents">
+        <p class="sec-issue__head">IN THIS ISSUE</p>
+        <ul>
+          <li>POTATO &amp; GERBIL ABLOH</li>
+          <li>BIKH FOR PRESIDENT</li>
+          <li>MAY GOD BLESS YOU</li>
+          <li>SARAH ELAWAD</li>
+          <li>PALESTINIAN SOUND ARCHIVE</li>
+          <li>NOTES ON MAKING IN RESTRICTED CIRCULATION</li>
+          <li>DIET PARATHA</li>
+          <li>XXCITED</li>
+        </ul>
+      </div>
+      <p class="text sec-issue__hint" hidden><span class="sec-hint-desk">CLICK THE COVER TO OPEN IT.<br>DRAG OR CLICK A PAGE TO TURN IT.</span><span class="sec-hint-phone">TAP THE COVER TO OPEN IT.<br>SWIPE TO TURN THE PAGES.</span></p>
+      <button type="button" class="text next-link sec-issue__read" data-sec-read hidden>READ ISSUE 01&gt;</button>
+      <p class="text sec-issue__filmhead">FLIP-THROUGH</p>
+      <div class="figure sec-issue__film">
+        <video autoplay muted loop playsinline preload="metadata" poster="img-webp/security-issue-01-poster.webp" aria-label="Security Issue 01, flip-through film">
+          <source src="video/security-issue-01.mp4" type="video/mp4">
+        </video>
+      </div>
+    </section>
+
+    <a class="text next-link security-next" href="when-will-you-free-me-2026.html">NEXT PROJECT&gt;</a>
+  </div>
+  <script src="mobile-menu.js?v=2"></script>
+  <script src="cursor.js"></script>
+</body>
+</html>

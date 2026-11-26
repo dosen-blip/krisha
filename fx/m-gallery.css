@@ -1,0 +1,249 @@
+/* fx/m-gallery.css — phone layer (fx/m-gallery.js): VIEWER.EXE, magnifier loupe, project readout, contact.
+   Everything is scoped to html.fx-phone (and .fxg-on = the module mounted). Desktop never matches. */
+
+/* ---- the images: no OS callout / selection / drag, so the long-press is ours */
+html.fx-phone.fxg-on .page :is(.photo, .photo-frame, .figure, .contact-portrait),
+html.fx-phone.fxg-on .page :is(.photo, .photo-frame, .figure, .contact-portrait) img {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---- Win98 zoom rectangles (open / close / loupe) */
+.fxg-rects {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  pointer-events: none;
+  overflow: hidden;
+}
+.fxg-rects__r {
+  position: absolute;
+  display: none;
+  box-sizing: border-box;
+  border: 1px solid var(--fx-ink, #000ca9);
+}
+
+/* ---- VIEWER.EXE: full screen, above the sticky phone nav (z 80), below transitions (100) */
+html.fxg-lock,
+html.fxg-lock body {
+  overflow: hidden;
+}
+
+.fxg-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: var(--fx-ink, #000ca9);
+  font-family: 'Pixelify Sans', sans-serif;
+  touch-action: none;
+  overscroll-behavior: contain;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.fxg-viewer.is-measuring {
+  visibility: hidden;
+}
+
+.fxg-bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  padding: 0 calc(18 * var(--m, 1px));
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+}
+.fxg-bar--top {
+  height: calc(56px + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.fxg-bar--bottom {
+  height: calc(60px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.fxg-label {
+  overflow: hidden;
+  text-overflow: clip;
+}
+.fxg-count {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.fxg-btn {
+  font: inherit;
+  font-size: 15px;
+  color: inherit;
+  background: #fff;
+  border: 1px solid var(--fx-ink, #000ca9);
+  box-shadow: 2px 2px 0 var(--fx-ink, #000ca9);
+  border-radius: 0;
+  min-width: 44px;
+  height: 34px;
+  padding: 0 10px;
+  -webkit-tap-highlight-color: transparent;
+}
+.fxg-btn:focus {
+  outline: none;
+}
+.fxg-btn:focus-visible {
+  outline: 1px dotted var(--fx-ink, #000ca9);   /* the Win98 focus rectangle */
+  outline-offset: -5px;
+}
+.fxg-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+.fxg-btn[hidden] {
+  visibility: hidden;
+  display: inline-block;
+}
+.fxg-close {
+  min-width: 96px;
+}
+
+.fxg-stage {
+  position: relative;
+  flex: 1 1 auto;
+  overflow: hidden;
+  touch-action: none;
+}
+.fxg-pic {
+  position: absolute;
+  overflow: hidden;
+  transform-origin: 50% 50%;
+  background: #fff;
+}
+.fxg-media {
+  position: absolute;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.fxg-viewer.is-zoomed .fxg-media {
+  image-rendering: pixelated;
+}
+.fxg-viewer.is-leaving .fxg-bar {
+  visibility: hidden;
+}
+
+/* zoom level tag, Win style */
+.fxg-zoom {
+  position: absolute;
+  z-index: 2;
+  top: 6px;
+  left: 50%;
+  translate: -50% 0;
+  padding: 2px 5px 1px;
+  font-size: 11px;
+  line-height: 1;
+  color: #fff;
+  background: var(--fx-ink, #000ca9);
+  pointer-events: none;
+}
+.fxg-zoom[hidden] { display: none; }
+
+/* ---- MS-Paint magnifier */
+.fxg-loupe {
+  position: fixed;
+  z-index: 92;
+  width: 132px;
+  height: 132px;
+  box-sizing: content-box;
+  border: 1px solid var(--fx-ink, #000ca9);
+  box-shadow: 3px 3px 0 var(--fx-ink, #000ca9);
+  background: #fff;
+  pointer-events: none;
+}
+.fxg-loupe__c {
+  display: block;
+  width: 132px;
+  height: 132px;
+  image-rendering: pixelated;
+}
+.fxg-loupe__tag {
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  padding: 2px 4px 1px;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 10px;
+  line-height: 1;
+  color: #fff;
+  background: var(--fx-ink, #000ca9);
+}
+
+/* ---- Win tooltip (contact) */
+.fxg-tip {
+  position: absolute;
+  z-index: 85;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px 5px;
+  background: #fff;
+  border: 1px solid var(--fx-ink, #000ca9);
+  box-shadow: 2px 2px 0 var(--fx-ink, #000ca9);
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--fx-ink, #000ca9);
+  white-space: nowrap;
+}
+.fxg-tip__send {
+  color: #0900ff;
+  text-decoration: none;
+  padding: 6px 2px;
+  margin: -6px 0;
+}
+
+/* ---- contact portrait: a card once tilt is on (transform + shadow set by JS in hard steps) */
+html.fx-phone .contact-portrait.fxg-tilt {
+  transform-origin: 50% 40%;
+  will-change: transform;
+}
+
+/* ---- project pages: a status bar at the bottom of the screen (fixed copy of the title + readout) that hands over to
+   the real title when it scrolls up into place. JS toggles .is-on and copies the title's type and box. */
+.fxg-status {
+  position: fixed;
+  bottom: 0;
+  z-index: 7;
+  display: none;
+  box-sizing: border-box;
+  padding: 8px 0 calc(8px + env(safe-area-inset-bottom, 0px));
+  background: #fff;
+  font-family: 'Pixelify Sans', sans-serif;
+  white-space: normal;
+  text-align: left;
+  pointer-events: none;
+}
+html.fx-phone .fxg-status.is-on {
+  display: block;
+}
+html:not(.fx-phone) .fxg-status {
+  display: none !important;
+}
+
+.fxg-readout {
+  display: inline-block;
+  margin-left: 1ch;
+  white-space: nowrap;
+  color: var(--fx-ink, #000ca9);
+  font-variant-numeric: tabular-nums;
+}
+.fxg-readout.is-step {
+  color: #fff;
+  background: var(--fx-ink, #000ca9);
+}

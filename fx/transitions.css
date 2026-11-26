@@ -1,0 +1,92 @@
+/* fx/transitions.css — page transitions (owned by fx/transitions.js). See fx/README.md. */
+
+/* ---- Leave: Win98 zoom rectangles, then the flat white the next page opens on ----------------------------------
+   transitions.js steps the rectangles (inline left/top/width/height, whole px) and then sets .is-white. */
+.fx-tx-zoom {
+  position: fixed;
+  inset: 0;
+  z-index: var(--fx-z-transition, 100);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fx-tx-zoom__rect {
+  position: absolute;
+  display: none;
+  box-sizing: border-box;
+  border: 1px solid var(--fx-ink, #000ca9);
+}
+
+.fx-tx-zoom.is-white {
+  background: #fff;
+}
+
+/* ---- Arrive: the same white from the very first paint (fx/prepaint.js sets html.fx-tx-cover) --------------------
+   transitions.js drops it (no fade) once the web font is ready and fires krisha:arrive in the same task; the collage
+   then loads interlaced (scroll-reveal.js). If no script ever runs, the failsafe drops it after 1.2s.
+   pointer-events: none so it can never trap a click. */
+html.fx-tx-cover::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  height: 100lvh;
+  z-index: var(--fx-z-transition, 100);
+  background: #fff;
+  pointer-events: none;
+  animation: fx-tx-release 0s linear 1.2s forwards;
+}
+
+@keyframes fx-tx-release {
+  to { visibility: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.fx-tx-cover::after,
+  .fx-tx-zoom { display: none !important; }
+}
+
+/* ---- Grow: a creative tile morphs into its project's hero (cross-document View Transitions) ----------------------
+   Both documents opt in; transitions.js (pageswap) and prepaint.js (pagereveal) skip every navigation except a fresh
+   grow, which they tag with the 'fx-grow' type. The old tile gets view-transition-name: fx-grow inline on click. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+html:active-view-transition-type(fx-grow) .pralaya-hero,
+html:active-view-transition-type(fx-grow) .ahlan-hero,
+html:active-view-transition-type(fx-grow) .talisman-hero,
+html:active-view-transition-type(fx-grow) .wwyfm-bg,
+html:active-view-transition-type(fx-grow) .wardi-bg,
+/* the hub is also a grow source (both covers): name its hero only while arriving, never in the old document */
+html.fx-tx-grow:active-view-transition-type(fx-grow) .sec-hub__issue--00 .sec-hub__cover,
+html:active-view-transition-type(fx-grow) .sec-issue__cover {
+  view-transition-name: fx-grow;
+}
+
+/* GROW_MS = 760ms (also in transitions.js) */
+html:active-view-transition-type(fx-grow)::view-transition-group(*) {
+  animation-duration: 760ms;
+  animation-timing-function: var(--fx-ease-in-out, cubic-bezier(0.65, 0, 0.35, 1));
+}
+
+/* Tile and hero have different shapes: crop both to the morphing box instead of stretching. No cross-fade: the tile
+   holds underneath, and the arriving hero — transparent until scroll-reveal.js draws its first coarse pass (the
+   live new snapshot) — covers it and refines inside the morph. */
+html:active-view-transition-type(fx-grow)::view-transition-old(fx-grow),
+html:active-view-transition-type(fx-grow)::view-transition-new(fx-grow) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: clip;
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* The new page cuts in at once under the morph: no line-open, no fade. */
+html:active-view-transition-type(fx-grow)::view-transition-old(root),
+html:active-view-transition-type(fx-grow)::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}

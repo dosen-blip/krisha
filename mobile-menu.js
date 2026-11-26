@@ -28,6 +28,15 @@ document.querySelectorAll('.mobile-menu').forEach((menu) => {
   summary.addEventListener('click', (event) => {
     event.preventDefault();
 
+    // Phone fx shell (fx/m-shell.js) runs the Start-menu open/close when it is mounted.
+    const fx = window.__fxMenu;
+    if (fx && fx.handles && fx.handles()) {
+      window.clearTimeout(closeTimer);
+      closeTimer = null;
+      fx.toggle(menu);
+      return;
+    }
+
     if (menu.classList.contains('is-closing')) {
       window.clearTimeout(closeTimer);
       menu.classList.remove('is-closing');

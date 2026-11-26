@@ -1,0 +1,257 @@
+/*
+ * fx/security.css — Security magazine flip-book (fx/flipbook.js GL viewer, fx/flipbook-lite.js DOM viewer,
+ * cover peek). Nothing here changes the page at rest: every rule targets classes the modules add.
+ * Stacking: viewers sit on --fx-z-viewer (70), under transitions (100) and the cursor (110).
+ */
+
+/* ------------------------------------------------------------ entries (covers + photographed spreads) */
+.sec-entry { cursor: pointer; }
+.sec-entry:focus { outline: none; }
+.sec-entry:focus-visible { outline: 2px solid #0900ff; outline-offset: 3px; }
+
+/* source element while the GL book stands in for it */
+.sec-fx-hold { visibility: hidden !important; }
+
+/* ------------------------------------------------------------ cover peek (GL) */
+.sec-peek {
+  position: absolute;
+  z-index: 6;
+  pointer-events: none;
+  visibility: hidden;
+}
+.sec-peek.is-live { visibility: visible; }
+.sec-peek > canvas { display: block; width: 100%; height: 100%; }
+.sec-issue__cover.sec-peek-live { background: transparent; }
+.sec-issue__cover.sec-peek-live > img { visibility: hidden; }
+
+/* ------------------------------------------------------------ shared chrome (bar + nav) */
+.sec-book,
+.sec-lite {
+  position: fixed;
+  inset: 0;
+  z-index: var(--fx-z-viewer, 70);
+  display: none;
+  font-family: 'Pixelify Sans', sans-serif;
+  color: #000;
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.sec-book.is-mounted,
+.sec-lite.is-mounted { display: block; }
+
+.sec-book__bar,
+.sec-lite__bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  height: calc(44 * var(--u, 1px));
+  min-height: 40px;
+  border-bottom: 1px solid #000;
+  background: #fff;
+}
+.sec-book__name,
+.sec-lite__name {
+  position: absolute;
+  left: calc(46 * var(--u, 1px));
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000ca9;
+  font-size: clamp(13px, calc(16 * var(--u, 1px)), 20px);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.sec-book button,
+.sec-lite button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 6px 8px;
+  border: 0;
+  background: none;
+  color: #000;
+  font: inherit;
+  font-size: clamp(14px, calc(16 * var(--u, 1px)), 20px);
+  line-height: 1;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.sec-book button:hover,
+.sec-lite button:hover { opacity: 0.6; }
+.sec-book button:disabled,
+.sec-lite button:disabled { opacity: 0.22; cursor: default; }
+.sec-book button:focus { outline: none; }
+.sec-lite button:focus { outline: none; }
+.sec-book button:focus-visible,
+.sec-lite button:focus-visible { outline: 2px solid #0900ff; outline-offset: 1px; }
+
+.sec-book__close,
+.sec-lite__close {
+  position: absolute;
+  right: calc(12 * var(--u, 1px));
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.sec-book__nav,
+.sec-lite__nav {
+  position: absolute;
+  left: 50%;
+  bottom: calc(20 * var(--u, 1px));
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: calc(18 * var(--u, 1px));
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.sec-book__count,
+.sec-lite__count {
+  min-width: 15ch;
+  color: #000ca9;
+  font-size: clamp(13px, calc(16 * var(--u, 1px)), 20px);
+  line-height: 1;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------ GL viewer */
+.sec-book__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #fff;
+  opacity: 0;
+  transition: opacity 460ms var(--fx-ease-out, ease-out);
+}
+.sec-book__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.sec-book__stage > canvas { opacity: 0; }
+.sec-book__hit {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 0;
+  height: 0;
+  touch-action: none;
+}
+.sec-book__bar,
+.sec-book__nav {
+  opacity: 0;
+  transition: opacity 360ms var(--fx-ease-out, ease-out);
+}
+.sec-book.is-open .sec-book__backdrop,
+.sec-book.is-open .sec-book__bar,
+.sec-book.is-open .sec-book__nav { opacity: 1; }
+.sec-book.is-open .sec-book__bar,
+.sec-book.is-open .sec-book__nav { transition-delay: 160ms; }
+.sec-book.is-dragging,
+.sec-book.is-dragging * { cursor: grabbing; }
+
+/* ------------------------------------------------------------ lite viewer */
+.sec-lite {
+  background: #fff;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+.sec-lite.is-open { opacity: 1; }
+.sec-lite.is-reduced { transition: none; }
+
+.sec-lite__track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: max(40px, calc(44 * var(--u, 1px)));
+  bottom: 64px;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  touch-action: pan-x pinch-zoom;
+  outline: none;
+}
+.sec-lite__track::-webkit-scrollbar { display: none; }
+.sec-lite__item {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+.sec-lite__spread {
+  display: flex;
+  width: min(calc(100vw - 32px), calc((100vh - 140px) * var(--a, 1.5)));
+  width: min(calc(100vw - 32px), calc((100dvh - 140px) * var(--a, 1.5)));
+  aspect-ratio: var(--a, 1.5);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transform: scale(0.97);
+  transition: transform 320ms var(--fx-ease-out, ease-out);
+}
+.sec-lite.is-open .sec-lite__spread { transform: none; }
+.sec-lite.is-reduced .sec-lite__spread { transform: none; transition: none; }
+.sec-lite__page {
+  position: relative;
+  flex: 1 1 0;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  background-repeat: no-repeat;
+}
+.sec-lite__page + .sec-lite__page::before {   /* gutter */
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 1;
+  width: 7%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+.sec-lite__page:has(+ .sec-lite__page)::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: 1;
+  width: 7%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+.sec-lite__page > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+.sec-lite__page > img.is-loaded { opacity: 1; }
+.sec-lite.is-reduced .sec-lite__page > img { transition: none; }
+
+@media (max-width: 700px) {
+  .sec-lite__bar { height: 48px; }
+  .sec-lite__name { left: 12px; font-size: 14px; }
+  .sec-lite__close { right: 6px; font-size: 15px; }
+  .sec-lite__track { top: 48px; bottom: 60px; }
+  .sec-lite__spread {
+    width: min(calc(100vw - 24px), calc((100vh - 128px) * var(--a, 0.75)));
+    width: min(calc(100vw - 24px), calc((100dvh - 128px) * var(--a, 0.75)));
+  }
+  .sec-lite__nav { bottom: 16px; gap: 10px; }
+  .sec-lite button { font-size: 16px; padding: 8px 12px; }
+  .sec-lite__count { font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sec-lite, .sec-lite__spread, .sec-lite__page > img,
+  .sec-book__backdrop, .sec-book__bar, .sec-book__nav { transition: none !important; }
+}

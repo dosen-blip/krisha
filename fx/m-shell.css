@@ -1,0 +1,221 @@
+/* fx/m-shell.css — phone layer, see fx/README.md. Owned by fx/m-shell.js.
+   Everything is scoped to html.fx-phone inside the ≤700px query: desktop never matches. */
+
+@media (max-width: 700px) {
+
+  /* ---- sticky nav: overflow-x:hidden on html/body made body a scroll container and .page overflow:hidden made
+     another, so position:sticky never stuck. clip clips the same pixels without being a scroll container.
+     (Browsers without overflow:clip ignore these and keep today's layout.) ------------------------------- */
+  html.fx-phone,
+  html.fx-phone body {
+    overflow-x: clip;
+  }
+
+  html.fx-phone body > .page {
+    overflow-x: clip;
+  }
+
+  /* pages whose .page clipped both axes (photography's plain .page, contact, creative): same clip, no scroller */
+  html.fx-phone body > .page:not([class*="-page"]),
+  html.fx-phone body > .page.contact-page,
+  html.fx-phone body > .page.creative-page {
+    overflow: clip;
+  }
+
+  /* photography's own stylesheet keeps its nav absolute: pin it like every other page (creative stays fixed) */
+  html.fx-phone body > .page:not(.creative-page) > .nav {
+    position: sticky;
+    top: 0;
+  }
+
+  /* ---- shared overlay: zoom rects, sparkles, tooltip. Never eats a touch. -------------------------------- */
+  html.fx-phone .fx-m-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 95;               /* phone overlay band: viewers 90 < overlays 95 < KRISHA.EXE dialog 96 < leave 100 */
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* the menu's own rects live inside the menu (above its panel, inside the nav's stacking context) */
+  html.fx-phone .fx-m-layer--menu {
+    z-index: 86;
+  }
+
+  html.fx-phone .fx-m-rect {
+    position: absolute;
+    display: none;
+    box-sizing: border-box;
+    border: 1px solid var(--fx-ink, #000ca9);
+    pointer-events: none;
+  }
+
+  /* ---- MENU: the panel cuts in (no slide, no fade); items land interlaced ------------------------------- */
+  html.fx-phone.fx-m-shell .mobile-menu[open] .mobile-menu__panel,
+  html.fx-phone.fx-m-shell .mobile-menu.is-closing .mobile-menu__panel {
+    animation: none;
+  }
+
+  html.fx-phone .mobile-menu.fx-m-opening .mobile-menu__panel,
+  html.fx-phone .mobile-menu.fx-m-gone .mobile-menu__panel,
+  html.fx-phone .mobile-menu__panel a.fx-m-wait {
+    visibility: hidden;
+  }
+
+  /* interlaced scanlines: every 4th line, then every 2nd, then whole */
+  html.fx-phone .mobile-menu__panel a.fx-m-il1,
+  html.fx-phone .mobile-menu.fx-m-out2 .mobile-menu__panel {
+    -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 1px, transparent 1px 4px);
+    mask-image: repeating-linear-gradient(to bottom, #000 0 1px, transparent 1px 4px);
+  }
+
+  html.fx-phone .mobile-menu__panel a.fx-m-il2,
+  html.fx-phone .mobile-menu.fx-m-out1 .mobile-menu__panel {
+    -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 1px, transparent 1px 2px);
+    mask-image: repeating-linear-gradient(to bottom, #000 0 1px, transparent 1px 2px);
+  }
+
+  /* pixel sparkle at the end of a landed item: l (7px star) then s (3px plus), white heart, KRISHA ink */
+  html.fx-phone .fx-m-spk {
+    --i: var(--fx-ink, #000ca9);
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    margin: -1px 0 0 -1px;
+    background: #fff;
+    visibility: hidden;
+  }
+
+  html.fx-phone .fx-m-spk.is-s,
+  html.fx-phone .fx-m-spk.is-l { visibility: visible; }
+
+  html.fx-phone .fx-m-spk.is-s {
+    box-shadow: 0 -2px var(--i), 0 2px var(--i), -2px 0 var(--i), 2px 0 var(--i);
+  }
+
+  html.fx-phone .fx-m-spk.is-l {
+    box-shadow:
+      0 -2px var(--i), 0 2px var(--i), -2px 0 var(--i), 2px 0 var(--i),
+      0 -4px var(--i), 0 4px var(--i), -4px 0 var(--i), 4px 0 var(--i),
+      0 -6px var(--i), 0 6px var(--i), -6px 0 var(--i), 6px 0 var(--i),
+      -2px -2px var(--i), 2px -2px var(--i), -2px 2px var(--i), 2px 2px var(--i);
+  }
+
+  /* XP progress blocks under a pressed item (fills from krisha:prefetch) */
+  html.fx-phone.fx-m-shell .mobile-menu__panel a {
+    position: relative;
+  }
+
+  html.fx-phone .fx-m-bar {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 3px);
+    height: 3px;
+    pointer-events: none;
+  }
+
+  html.fx-phone .fx-m-bar__fill {
+    position: absolute;      /* it is a span inside .nav: undo the nav word placement (.nav span) */
+    left: 0;
+    top: 0;
+    display: block;
+    width: 0;
+    height: 100%;
+    background: repeating-linear-gradient(to right, var(--fx-ink, #000ca9) 0 6px, transparent 6px 8px);
+  }
+
+  /* ---- scroll progress: XP blocks along the bottom edge of the sticky nav --------------------------------- */
+  html.fx-phone .fx-m-prog {
+    position: absolute;
+    left: calc(18 * var(--m, 1px));
+    right: calc(18 * var(--m, 1px));
+    bottom: 2px;
+    height: 3px;
+    pointer-events: none;
+  }
+
+  html.fx-phone .fx-m-prog.is-off,
+  html.fx-phone[data-fx-modal] .fx-m-prog,
+  html.fx-phone[data-fx-modal] .fx-m-layer:not(.fx-m-layer--menu) { display: none; }
+
+  html.fx-phone .fx-m-prog__fill {
+    width: 0;
+    height: 100%;
+    background: repeating-linear-gradient(to right, var(--fx-ink, #000ca9) 0 6px, transparent 6px 8px);
+  }
+
+  /* ---- touch: no grey tap flash (the zoom-rect burst is the feedback); no OS callout on page links -------- */
+  html.fx-phone.fx-m-shell.fx-motion a,
+  html.fx-phone.fx-m-shell.fx-motion summary {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html.fx-phone.fx-m-shell a[href$=".html"]:not([href^="http"]) {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Win-style tooltip: white box, 1px ink border, hard offset shadow, Pixelify */
+  html.fx-phone .fx-m-tip {
+    position: absolute;
+    display: none;
+    max-width: calc(100vw - 16px);
+    box-sizing: border-box;
+    padding: 4px 7px 3px;
+    background: #fff;
+    border: 1px solid var(--fx-ink, #000ca9);
+    box-shadow: 2px 2px 0 var(--fx-ink, #000ca9);
+    color: var(--fx-ink, #000ca9);
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+  }
+
+  /* ---- landing: MS-Paint marching-ants selection around a tapped nav word -------------------------------- */
+  html.fx-phone .fx-m-ants {
+    position: fixed;
+    z-index: 95;               /* under a leave's zoom rects and white (100) */
+    box-sizing: border-box;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, #fff 50%, var(--fx-ink, #000ca9) 0),
+      linear-gradient(to right, #fff 50%, var(--fx-ink, #000ca9) 0),
+      linear-gradient(to bottom, #fff 50%, var(--fx-ink, #000ca9) 0),
+      linear-gradient(to bottom, #fff 50%, var(--fx-ink, #000ca9) 0);
+    background-size: 8px 1px, 8px 1px, 1px 8px, 1px 8px;
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-position: 0 0, 0 100%, 0 0, 100% 0;
+    animation: fx-m-ants 0.32s steps(4) infinite;
+  }
+
+  @keyframes fx-m-ants {
+    to { background-position: 8px 0, -8px 100%, 0 -8px, 100% 8px; }
+  }
+
+  /* 5px handles at the corners and mid-edges, white with an ink rim */
+  html.fx-phone .fx-m-ants i {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid var(--fx-ink, #000ca9);
+  }
+
+  html.fx-phone .fx-m-ants i:nth-child(1) { left: -2px; top: -2px; }
+  html.fx-phone .fx-m-ants i:nth-child(2) { right: -2px; top: -2px; }
+  html.fx-phone .fx-m-ants i:nth-child(3) { left: -2px; bottom: -2px; }
+  html.fx-phone .fx-m-ants i:nth-child(4) { right: -2px; bottom: -2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.fx-phone .fx-m-ants { animation: none; }
+    html.fx-phone .fx-m-layer .fx-m-rect,
+    html.fx-phone .fx-m-spk { display: none !important; }
+  }
+}

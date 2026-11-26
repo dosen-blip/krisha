@@ -1,0 +1,89 @@
+/*
+ * fx/ring.css — the KRISHA ring in 3D (owner: ring). See fx/ring.js.
+ * Everything here is inert until fx/ring.js mounts (the hero host is empty, the classes are added by JS).
+ */
+
+/* ---- hero (index): centred above the nav row, over the landing video ---------------------------- */
+.fx-hero-ring {
+  position: absolute;
+  left: 50%;
+  top: 20.5vh;
+  width: 46vh;
+  height: 46vh;
+  transform: translateX(-50%);
+  pointer-events: none;          /* ring.js switches it on only while the pointer is over the ring */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.fx-hero-ring > .fx-ring-canvas {
+  opacity: 0;
+  transition: opacity 1.1s var(--fx-ease-out, ease-out);
+}
+
+.fx-hero-ring.is-live > .fx-ring-canvas { opacity: 1; }
+
+/* ---- emblem (security): the canvas sits over the GIF; the GIF hides only once GL has drawn ------ */
+.security-logo > .fx-ring-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+/* Above the full-width issue sections that overlap the emblem box (so the ring can be grabbed), below the
+   intro copy (z 5) and the flip-book cover peek (z 6). The host only takes pointer events over the ring. */
+.security-logo.fx-ring-live { z-index: 4; }
+
+.security-logo.fx-ring-live > img { visibility: hidden; }
+
+/* ---- nav logo: canvas overhanging the flat logo (positioned inline by ring.js) ------------------ */
+.fx-ring-nav {
+  position: absolute;
+  pointer-events: none;
+}
+
+.fx-ring-nav > .fx-ring-canvas { pointer-events: none; }
+
+.nav__logo.fx-ring-hidden { visibility: hidden; }
+
+/* ---- narrow desktop windows (no fx-phone): the static page --------------------------------------- */
+@media (max-width: 700px) {
+  html:not(.fx-phone) .fx-hero-ring { display: none; }
+}
+
+/* ---- phones (html.fx-phone, the --m layouts) ----------------------------------------------------- */
+@media (max-width: 700px) {
+  /* landing: a square stage above the nav column (nav at 40.6vh); the ring's ink spans ~13-34vh */
+  html.fx-phone .fx-hero-ring {
+    top: 8.5vh;
+    width: min(30vh, 84vw);
+    height: min(30vh, 84vw);
+    touch-action: auto;
+  }
+
+  /* the only place a phone gesture is claimed: over the ring box, once the ring is live (index never scrolls) */
+  html.fx-phone .fx-hero-ring.is-live {
+    pointer-events: auto;
+    touch-action: none;
+  }
+
+  /* security emblem: the GIF fills its 116m box on phones, so the spinning ring draws in an overhanging stage */
+  html.fx-phone .security-logo > .fx-ring-emblem {
+    position: absolute;
+    inset: -24%;
+    pointer-events: none;
+  }
+
+  html.fx-phone .security-logo.fx-ring-live { z-index: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-hero-ring,
+  .fx-ring-nav,
+  .security-logo > .fx-ring-canvas { display: none !important; }
+  .security-logo.fx-ring-live > img,
+  .nav__logo.fx-ring-hidden { visibility: visible; }
+}

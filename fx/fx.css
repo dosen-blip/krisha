@@ -1,0 +1,27 @@
+/* fx/fx.css — shared base for the effects layer (owned by fx core). Feature CSS lives in its own file. */
+
+:root {
+  --fx-ink: #000ca9;
+  --fx-ink-bright: #0900ff;
+  --fx-ease-out: cubic-bezier(0.16, 1, 0.3, 1);   /* the site's existing reveal curve */
+  --fx-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* stacking contract */
+  --fx-z-overlay: 60;      /* paint focus / page overlays */
+  --fx-z-viewer: 70;       /* security flip-book viewer */
+  --fx-z-transition: 100;  /* page transition cover */
+  --fx-z-cursor: 110;      /* cursor follower */
+}
+
+.fx-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* A canvas that never eats clicks unless a feature opts in. */
+.fx-canvas--passive { pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-canvas { display: none !important; }
+}

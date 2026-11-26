@@ -1,0 +1,140 @@
+/*
+ * fx/arrival.css — landing "pixel glitter" (index only). See fx/arrival.js.
+ *
+ * html.fx-arrival-pending  set before first paint by cursor-boot.js (first index visit of the session,
+ *                          motion allowed). Hides the landing words; the hide is itself a 2.6s animation,
+ *                          so the words come back on their own if arrival.js never takes over.
+ * html.fx-arrival-run      set by arrival.js while the letters assemble (<= 1.2s), then removed together
+ *                          with the letter spans (the original text nodes are put back).
+ * .fx-spk                  a 4-point pixel sparkle: one --spk-p square (white heart) plus box-shadow pixels in
+ *                          link blue, popped through s / m / l in hard steps (step-end), then hidden.
+ */
+
+html.fx-arrival-pending .hero .nav a,
+html.fx-arrival-pending .hero .identity__name,
+html.fx-arrival-pending .hero .identity__role,
+html.fx-arrival-pending .hero .identity__email {
+  animation: fx-arr-pending 2.6s step-end;
+}
+
+@keyframes fx-arr-pending {
+  from, to { opacity: 0; }
+}
+
+/* Original text for assistive tech while the visible copy is split into letters. */
+.fx-arr-sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Letters: invisible until their frame, then on. No fade, no motion. */
+html.fx-arrival-run .fx-arr-l {
+  position: relative;
+  opacity: 0;
+  animation: fx-arr-land 1ms step-end var(--d, 0s) forwards;
+}
+
+@keyframes fx-arr-land {
+  from, to { opacity: 1; }
+}
+
+/* ---------------------------------------------------------------- sparkle */
+.fx-spk {
+  --spk-ink: #0900ff;            /* link blue: the landing sits on a dark video */
+  --spk-p: 2px;
+  --spk-1: var(--spk-p);
+  --spk-2: calc(2 * var(--spk-p));
+  --spk-3: calc(3 * var(--spk-p));
+  /* s: 3px plus */
+  --spk-s:
+    0 calc(-1 * var(--spk-1)) var(--spk-ink), 0 var(--spk-1) var(--spk-ink),
+    calc(-1 * var(--spk-1)) 0 var(--spk-ink), var(--spk-1) 0 var(--spk-ink);
+  /* m: 5px plus */
+  --spk-m: var(--spk-s),
+    0 calc(-1 * var(--spk-2)) var(--spk-ink), 0 var(--spk-2) var(--spk-ink),
+    calc(-1 * var(--spk-2)) 0 var(--spk-ink), var(--spk-2) 0 var(--spk-ink);
+  /* l: 7px four-point star with a 3x3 body */
+  --spk-l: var(--spk-m),
+    0 calc(-1 * var(--spk-3)) var(--spk-ink), 0 var(--spk-3) var(--spk-ink),
+    calc(-1 * var(--spk-3)) 0 var(--spk-ink), var(--spk-3) 0 var(--spk-ink),
+    calc(-1 * var(--spk-1)) calc(-1 * var(--spk-1)) var(--spk-ink), var(--spk-1) calc(-1 * var(--spk-1)) var(--spk-ink),
+    calc(-1 * var(--spk-1)) var(--spk-1) var(--spk-ink), var(--spk-1) var(--spk-1) var(--spk-ink);
+  position: absolute;
+  width: var(--spk-p);
+  height: var(--spk-p);
+  margin: calc(-0.5 * var(--spk-p)) 0 0 calc(-0.5 * var(--spk-p));
+  background: #fff;
+  visibility: hidden;
+  pointer-events: none;
+  animation-duration: var(--sd, 0.18s);
+  animation-delay: var(--d, 0s);
+  animation-timing-function: step-end;
+  animation-fill-mode: forwards;
+}
+
+/* Intro sparkles sit on their letter (anchor planned in arrival.js) and share its landing frame. */
+.fx-arr-l > .fx-spk {
+  left: calc(var(--sx, 0.7) * 100%);
+  top: calc(var(--sy, 0.25) * 100%);
+}
+
+html:not(.fx-arrival-run) .fx-arr-l > .fx-spk { animation: none; }
+
+.fx-spk--blink { animation-name: fx-spk-blink; }
+.fx-spk--pop { animation-name: fx-spk-pop; }
+.fx-spk--twinkle { animation-name: fx-spk-twinkle; }
+.fx-spk--flash { animation-name: fx-spk-flash; }
+
+@keyframes fx-spk-blink {          /* s m */
+  0% { visibility: visible; box-shadow: var(--spk-s); }
+  50% { visibility: visible; box-shadow: var(--spk-m); }
+  100% { visibility: hidden; box-shadow: none; }
+}
+
+@keyframes fx-spk-pop {            /* s l m */
+  0% { visibility: visible; box-shadow: var(--spk-s); }
+  33.333% { visibility: visible; box-shadow: var(--spk-l); }
+  66.667% { visibility: visible; box-shadow: var(--spk-m); }
+  100% { visibility: hidden; box-shadow: none; }
+}
+
+@keyframes fx-spk-twinkle {        /* m l s */
+  0% { visibility: visible; box-shadow: var(--spk-m); }
+  33.333% { visibility: visible; box-shadow: var(--spk-l); }
+  66.667% { visibility: visible; box-shadow: var(--spk-s); }
+  100% { visibility: hidden; box-shadow: none; }
+}
+
+@keyframes fx-spk-flash {          /* l s */
+  0% { visibility: visible; box-shadow: var(--spk-l); }
+  50% { visibility: visible; box-shadow: var(--spk-s); }
+  100% { visibility: hidden; box-shadow: none; }
+}
+
+/* After-glint on the name: a pointer-transparent layer over the hero (arrival.js positions each sparkle). */
+.fx-glint-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.fx-arrival-pending .hero .nav a,
+  html.fx-arrival-pending .hero .identity__name,
+  html.fx-arrival-pending .hero .identity__role,
+  html.fx-arrival-pending .hero .identity__email,
+  html.fx-arrival-run .fx-arr-l {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .fx-spk { display: none !important; }
+}

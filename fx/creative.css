@@ -1,0 +1,68 @@
+/* fx/creative.css — Creative direction tiles (owned by fx/creative.js, see fx/README.md). */
+
+/* One WebGL layer over the six tiles: inside .creative-page so it scrolls with them natively.
+   Above the figures (z auto), below the labels (.text z 5) and the nav (z 20). Never takes the pointer:
+   the DOM anchors stay the click / keyboard targets. JS sets left/top/width/height. */
+.cd-fx-layer {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cd-fx-layer .cd-fx-canvas {
+  pointer-events: none;
+}
+
+/* A tile GL has drawn: the anchor is only a hit area now (the plane carries the picture). */
+.creative-page > a.figure.cd-fx-gl {
+  background: transparent;
+  filter: none;
+}
+
+.creative-page > a.figure.cd-fx-gl > img {
+  opacity: 0;
+  transition: none;
+  transform: none;
+}
+
+/* Keyboard focus on a live tile: a plain outline (the selection rectangle is switched off). */
+.creative-page > a.figure.cd-fx-gl:focus-visible {
+  outline: 2px solid #0900ff;
+  outline-offset: 3px;
+}
+
+/* A clicked tile handed back to the DOM for the grow transition: the plain cover, exactly as GL drew it
+   (no hover brighten / zoom starting under the morph). */
+.creative-page > a.figure.cd-fx-handoff,
+.creative-page > a.figure.cd-fx-handoff > img {
+  filter: none;
+  transform: none;
+  transition: none;
+}
+
+/* The label follows its tile (hover / focus on either), at once like the selection. */
+.creative-page > a.text.cd-fx-label {
+  transition: none;
+}
+
+.creative-page > a.text.cd-fx-active {
+  color: #000ca9;
+}
+
+/* The preview's count after the title ("2/4", "00:07"), only while selected. */
+.creative-page > a.text > .cd-fx-count {
+  display: none;
+}
+
+.creative-page > a.text.cd-fx-active > .cd-fx-count {
+  display: inline;
+  margin-left: 0.75em;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 700px) {
+  .cd-fx-layer { display: none; }
+  .creative-page > a.figure.cd-fx-gl { background: #000; }
+  .creative-page > a.figure.cd-fx-gl > img { opacity: 1; }
+  .creative-page > a.text > .cd-fx-count { display: none; }
+}

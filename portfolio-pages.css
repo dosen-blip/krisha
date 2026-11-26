@@ -162,7 +162,8 @@ a.text[class*="cd-label-"]:hover {
 .wardi-page { --page-h: 1489; }
 .ahlan-page { --page-h: 811; }
 .talisman-page { --page-h: 2044; }
-.security-page { --page-h: 2120; }
+.security-hub { --page-h: 860; }
+.security-issue-page { --page-h: 1530; }
 .wwyfm-page { --page-h: 1613; }
 .contact-page { --page-h: 832; }
 
@@ -175,7 +176,6 @@ a.text[class*="cd-label-"]:hover {
 .cd-ahlan { left: calc(685 * var(--u)); top: calc(449 * var(--u)); width: calc(551 * var(--u)); height: calc(330 * var(--u)); }
 .cd-ahlan img { left: 0; top: calc(-0.2 * var(--u)); width: 100%; height: calc(367.39 * var(--u)); }
 .cd-security { left: calc(44 * var(--u)); top: calc(846 * var(--u)); width: calc(553 * var(--u)); height: calc(328 * var(--u)); }
-.cd-security img { left: calc(-41.75 * var(--u)); top: calc(-101.35 * var(--u)); width: calc(669.79 * var(--u)); height: calc(552.32 * var(--u)); }
 .cd-wardi { left: calc(681 * var(--u)); top: calc(846 * var(--u)); width: calc(551 * var(--u)); height: calc(328 * var(--u)); }
 .cd-wardi img { left: calc(0.88 * var(--u)); top: calc(-204.93 * var(--u)); width: 100%; height: calc(826.4 * var(--u)); }
 .cd-label-pralaya { left: calc(49 * var(--u)); top: calc(407 * var(--u)); }
@@ -252,18 +252,6 @@ a.text[class*="cd-label-"]:hover {
   transform: rotate(-29.72deg);
 }
 
-.security-01 { left: calc(341 * var(--u)); top: calc(81 * var(--u)); width: calc(277 * var(--u)); height: calc(394 * var(--u)); }
-.security-02 { left: calc(3 * var(--u)); top: calc(503 * var(--u)); width: calc(1274 * var(--u)); height: calc(647 * var(--u)); }
-.security-03 { left: calc(651 * var(--u)); top: calc(81 * var(--u)); width: calc(527 * var(--u)); height: calc(395 * var(--u)); }
-.security-03 img { left: calc(-515.41 * var(--u)); top: calc(-303.32 * var(--u)); width: calc(1218.37 * var(--u)); height: calc(1004.52 * var(--u)); }
-.security-05 { left: calc(12 * var(--u)); top: calc(1150 * var(--u)); width: calc(424 * var(--u)); height: calc(282 * var(--u)); }
-.security-06 { left: calc(448 * var(--u)); top: calc(1806 * var(--u)); width: calc(423 * var(--u)); height: calc(271 * var(--u)); }
-.security-06 img { left: calc(-0.3 * var(--u)); top: calc(-182.16 * var(--u)); width: calc(423.59 * var(--u)); height: calc(636.44 * var(--u)); }
-.security-07 { left: calc(446 * var(--u)); top: calc(1150 * var(--u)); width: calc(425 * var(--u)); height: calc(637 * var(--u)); }
-.security-08 { left: calc(882 * var(--u)); top: calc(1150 * var(--u)); width: calc(385 * var(--u)); height: calc(257 * var(--u)); }
-.security-09 { left: calc(883 * var(--u)); top: calc(1418 * var(--u)); width: calc(384 * var(--u)); height: calc(659 * var(--u)); }
-.security-09 img { left: calc(-56.68 * var(--u)); top: calc(0.13 * var(--u)); width: calc(440.76 * var(--u)); height: calc(659.72 * var(--u)); }
-.security-10 { left: calc(14 * var(--u)); top: calc(1442 * var(--u)); width: calc(423 * var(--u)); height: calc(635 * var(--u)); }
 .security-copy {
   left: calc(32 * var(--u));
   top: calc(204 * var(--u));
@@ -272,7 +260,68 @@ a.text[class*="cd-label-"]:hover {
   line-height: normal;
   white-space: normal;
 }
-.security-next { left: calc(1100 * var(--u)); top: calc(2079 * var(--u)); }
+
+/* Security hub (security-magazine-2025.html): emblem + intro, then the two issues side by side, each opening its page */
+.sec-hub__issue { position: absolute; top: calc(81 * var(--u)); height: calc(700 * var(--u)); }
+.sec-hub__issue--00 { left: calc(400 * var(--u)); width: calc(380 * var(--u)); }
+.sec-hub__issue--01 { left: calc(830 * var(--u)); width: calc(396 * var(--u)); }
+.sec-hub__cover { left: 0; top: 0; width: 100%; height: calc(540 * var(--u)); }
+.sec-hub__label { left: 0; top: calc(554 * var(--u)); --fs: 16; line-height: 1.25; }
+.sec-hub__no { color: #000ca9; }
+.sec-hub__open { left: 0; top: calc(642 * var(--u)); --fs: 20; }
+.security-hub .security-next { left: auto; right: calc(12 * var(--u)); top: calc(800 * var(--u)); }
+
+/* Security issue pages (security-issue-00/01.html): title + copy | readable cover | contents + READ, then the film */
+.sec-back { left: calc(32 * var(--u)); top: calc(66 * var(--u)); --fs: 15; --color: #0900ff; }
+.sec-back:hover { opacity: 0.7; }
+
+.sec-issue {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(1280 * var(--u));
+  height: 100%;
+}
+
+.sec-issue__title {
+  left: calc(32 * var(--u));
+  top: calc(104 * var(--u));
+  margin: 0;
+  font-weight: normal;
+  --fs: 40;
+  line-height: 1.05;
+}
+.sec-issue__title > span { display: block; }
+.sec-issue__no { color: #000ca9; }
+.sec-issue__name { font-size: 0.6em; margin-top: 0.15em; }
+.sec-issue__meta { font-size: 0.375em; margin-top: 0.9em; }
+
+.sec-issue__copy {
+  left: calc(32 * var(--u));
+  top: calc(222 * var(--u));
+  width: calc(330 * var(--u));
+  --fs: 15;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.sec-issue__cover { left: calc(420 * var(--u)); top: calc(81 * var(--u)); width: calc(420 * var(--u)); height: calc(597 * var(--u)); }
+.sec-issue--01 .sec-issue__cover { width: calc(438 * var(--u)); }
+
+.sec-issue__contents { left: calc(900 * var(--u)); top: calc(81 * var(--u)); width: calc(340 * var(--u)); --fs: 15; line-height: 1.5; white-space: normal; }
+.sec-issue__contents ul { list-style: none; }
+.sec-issue__head { color: #000ca9; margin-bottom: 0.5em; }
+
+.sec-issue__hint { left: calc(900 * var(--u)); top: calc(574 * var(--u)); --fs: 13; line-height: 1.35; color: #000ca9; }
+.sec-hint-phone { display: none; }
+.sec-issue__read { left: calc(900 * var(--u)); top: calc(640 * var(--u)); border: 0; font-family: inherit; cursor: pointer; }
+.sec-issue__hint[hidden], .sec-issue__read[hidden] { display: none; }
+
+.sec-issue__filmhead { left: calc(12 * var(--u)); top: calc(716 * var(--u)); --fs: 15; color: #000ca9; }
+.sec-issue__film { left: calc(12 * var(--u)); top: calc(740 * var(--u)); width: calc(1256 * var(--u)); height: calc(706.5 * var(--u)); }
+.sec-issue__film video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.security-issue-page .security-next { left: auto; right: calc(12 * var(--u)); top: calc(1466 * var(--u)); }
 
 .wwyfm-bg { left: calc(-350 * var(--u)); top: calc(44 * var(--u)); width: calc(1815 * var(--u)); height: calc(1650 * var(--u)); }
 .wwyfm-bg img { left: calc(-0.18 * var(--u)); top: 0; width: calc(1649.47 * var(--u)); height: 100%; }
@@ -565,7 +614,7 @@ a.text[class*="cd-label-"]:hover {
     display: block;
     position: relative;
     width: calc(402 * var(--m));
-    height: calc(4070 * var(--m));
+    height: calc(3549 * var(--m));
     margin: 0 auto;
     overflow: hidden;
     background: #fff;
@@ -705,71 +754,16 @@ a.text[class*="cd-label-"]:hover {
   .mcr-talisman-5 { left: calc(1 * var(--m));    top: calc(2683 * var(--m)); width: calc(143 * var(--m)); height: calc(88 * var(--m)); }
   .mcr-label-talisman { left: calc(324 * var(--m)); top: calc(2742 * var(--m)); }
 
-  /* SECURITY MAGAZINE section */
-  .mcr-security-1 { left: calc(37 * var(--m));   top: calc(2798 * var(--m)); width: calc(115 * var(--m)); height: calc(164 * var(--m)); }
-  .mcr-security-2 { left: calc(161 * var(--m));  top: calc(2798 * var(--m)); width: calc(218 * var(--m)); height: calc(164 * var(--m)); }
-  .mcr-security-3 { left: calc(10 * var(--m));   top: calc(2975 * var(--m)); width: calc(391 * var(--m)); height: calc(395 * var(--m)); }
-  .mcr-security-4 { left: calc(-2 * var(--m));   top: calc(3370 * var(--m)); width: calc(391 * var(--m)); height: calc(389 * var(--m)); }
-  .mcr-security-5 { left: calc(9 * var(--m));    top: calc(3780 * var(--m)); width: calc(131 * var(--m)); height: calc(87 * var(--m)); }
-  .mcr-security-6 { left: calc(143 * var(--m));  top: calc(3981 * var(--m)); width: calc(131 * var(--m)); height: calc(84 * var(--m)); }
-  .mcr-security-7 { left: calc(142 * var(--m));  top: calc(3780 * var(--m)); width: calc(131 * var(--m)); height: calc(196 * var(--m)); }
-  .mcr-security-8 { left: calc(276 * var(--m));  top: calc(3780 * var(--m)); width: calc(119 * var(--m)); height: calc(79 * var(--m)); }
-  .mcr-security-9 { left: calc(277 * var(--m));  top: calc(3862 * var(--m)); width: calc(118 * var(--m)); height: calc(203 * var(--m)); }
-  .mcr-security-10 { left: calc(10 * var(--m));  top: calc(3870 * var(--m)); width: calc(130 * var(--m)); height: calc(195 * var(--m)); }
-
-  .mcr-security-2 img {
-    position: absolute;
-    left: -97.8%;
-    top: -76.79%;
-    width: 231.19%;
-    height: 254.31%;
-    max-width: none;
-    object-fit: fill;
-  }
-
-  .mcr-security-3 img {
-    position: absolute;
-    left: -0.24%;
-    top: 0;
-    width: 198.95%;
-    height: 100%;
-    max-width: none;
-    object-fit: fill;
-  }
-
-  .mcr-security-4 img {
-    position: absolute;
-    left: -95.71%;
-    top: 0;
-    width: 195.95%;
-    height: 100%;
-    max-width: none;
-    object-fit: fill;
-  }
-
-  .mcr-security-6 img {
-    position: absolute;
-    left: -0.07%;
-    top: -67.22%;
-    width: 100.14%;
-    height: 234.85%;
-    max-width: none;
-    object-fit: fill;
-  }
-
-  .mcr-security-9 img {
-    position: absolute;
-    left: -14.76%;
-    top: 0.02%;
-    width: 114.78%;
-    height: 100.11%;
-    max-width: none;
-    object-fit: fill;
-  }
+  /* SECURITY MAGAZINE section: Issue 00 film, both covers, Issue 01 film */
+  .mcr-security-1  { left: calc(10 * var(--m));  top: calc(2798 * var(--m)); width: calc(382 * var(--m)); height: calc(215 * var(--m)); }
+  .mcr-security-2  { left: calc(10 * var(--m));  top: calc(3019 * var(--m)); width: calc(188 * var(--m)); height: calc(261 * var(--m)); }
+  .mcr-security-3  { left: calc(204 * var(--m)); top: calc(3019 * var(--m)); width: calc(188 * var(--m)); height: calc(261 * var(--m)); }
+  .mcr-security-4  { left: calc(10 * var(--m));  top: calc(3286 * var(--m)); width: calc(382 * var(--m)); height: calc(215 * var(--m)); }
+  .mcr-label-security { left: calc(290 * var(--m)); top: calc(3484 * var(--m)); }
 
   .mcr-paint-link {
     left: calc(330 * var(--m));
-    top: calc(4035 * var(--m));
+    top: calc(3514 * var(--m));
   }
 
   .paint-page {
@@ -989,21 +983,75 @@ a.text[class*="cd-label-"]:hover {
     flex-direction: column;
   }
 
-  .security-page > .security-01,
-  .security-page > .security-02,
-  .security-page > .security-03,
-  .security-page > .security-05,
-  .security-page > .security-06,
-  .security-page > .security-07,
-  .security-page > .security-08,
-  .security-page > .security-09,
-  .security-page > .security-10 {
+  /* hub: the two issues side by side under the intro */
+  .sec-hub {
     order: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(12 * var(--m));
+    margin: calc(6 * var(--m)) 0 0;
   }
 
-  .security-page > .next-link {
-    order: 4;
+  .sec-hub__issue,
+  .sec-hub__issue .figure,
+  .sec-hub__issue .text {
+    position: static;
+    inset: auto;
+    width: auto;
+    height: auto;
   }
+
+  .sec-hub__issue { display: flex; flex-direction: column; }
+  .sec-hub__cover { display: block; position: relative !important; aspect-ratio: 0.72; margin: 0 0 calc(8 * var(--m)); }
+  .sec-hub__label { font-size: 13px; line-height: 1.3; white-space: normal; margin: 0 0 calc(8 * var(--m)); }
+  .sec-hub__open { align-self: flex-start; font-size: 15px; }
+
+  .security-page > .security-next { order: 5; }
+
+  /* issue pages */
+  .security-page > .sec-back {
+    order: 0;
+    margin: calc(14 * var(--m)) 0 0;
+    color: #0900ff;
+    font-size: 14px;
+  }
+
+  .sec-issue {
+    order: 3;
+    position: static;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    margin: calc(14 * var(--m)) 0 0;
+  }
+
+  .sec-issue .figure,
+  .sec-issue .text {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    white-space: normal;
+  }
+
+  .sec-issue__title { font-size: 34px; line-height: 1.05; margin: 0 0 calc(12 * var(--m)); }
+  .sec-issue__copy { font-size: 14px; line-height: 1.45; margin: 0 0 calc(22 * var(--m)); }
+
+  .sec-issue .sec-issue__cover {
+    width: 74%;
+    aspect-ratio: 0.703;
+    margin: 0 auto calc(14 * var(--m));
+  }
+  .sec-issue--01 .sec-issue__cover { aspect-ratio: 0.733; }
+
+  .sec-issue .sec-issue__hint { order: 1; text-align: center; font-size: 12px; margin: 0 0 calc(10 * var(--m)); }
+  .sec-hint-desk { display: none; }
+  .sec-hint-phone { display: inline; }
+  .sec-issue .sec-issue__read { order: 1; align-self: center; width: auto; font-size: 18px; margin: 0 0 calc(28 * var(--m)); }
+  .sec-issue .sec-issue__contents { order: 2; font-size: 13px; line-height: 1.5; margin: 0 0 calc(28 * var(--m)); }
+  .sec-issue .sec-issue__filmhead { order: 3; font-size: 13px; margin: 0 0 calc(6 * var(--m)); }
+  .sec-issue .sec-issue__film { order: 4; aspect-ratio: 16 / 9; }
 
   .contact-page {
     height: calc(930 * var(--m));

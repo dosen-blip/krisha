@@ -3,16 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="fx/prepaint.js"></script>
   <title>Krisha Dave - AHLAN 2023</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
-  <script src="cursor-boot.js"></script>
-  <link rel="stylesheet" href="cursor.css">
-  <link rel="stylesheet" href="scroll-reveal.css">
-  <script src="page-sounds.js"></script>
-  <script src="scroll-reveal.js?v=2" defer></script>
-  <link rel="stylesheet" href="portfolio-pages.css?v=7">
+  <script src="cursor-boot.js?v=2"></script>
+  <link rel="stylesheet" href="cursor.css?v=3">
+  <link rel="stylesheet" href="scroll-reveal.css?v=2">
+  <script src="page-sounds.js?v=2"></script>
+  <script src="scroll-reveal.js?v=4" defer></script>
+  <link rel="stylesheet" href="portfolio-pages.css?v=10">
+  <!-- fx layer (see fx/README.md) -->
+  <link rel="stylesheet" href="fx/fx.css">
+  <link rel="stylesheet" href="fx/transitions.css?v=3">
+  <link rel="stylesheet" href="fx/ring.css">
+  <link rel="stylesheet" href="fx/m-shell.css">
+  <link rel="stylesheet" href="fx/m-gallery.css">
+  <script type="importmap">
+    { "imports": {
+      "three": "./vendor/three/build/three.module.min.js",
+      "three/addons/": "./vendor/three/examples/jsm/"
+    } }
+  </script>
+  <script type="module" src="fx/boot.js?v=4"></script>
 </head>
 <body>
   <div class="page ahlan-page">
@@ -44,7 +58,7 @@
     <p class="text ahlan-title">AHLAN 2023</p>
     <a class="text next-link ahlan-next" href="talisman-2026.html">NEXT PROJECT&gt;</a>
   </div>
-  <script src="mobile-menu.js"></script>
+  <script src="mobile-menu.js?v=2"></script>
   <script src="cursor.js"></script>
 </body>
 </html>

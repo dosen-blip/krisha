@@ -1,0 +1,237 @@
+/* fx/paint.css — Paint page effects (fx/paint.js desktop GL, fx/paint-lite.js phones / no GL). See fx/README.md. */
+
+/* ---------------------------------------------------------------- GL: page layer */
+/* Page-sized canvas, first child of .paint-page: painted above the page background, under the figures. */
+.fx-paint-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fx-paint-layer > canvas {
+  position: absolute;
+  inset: 0;
+}
+
+/* A figure GL has drawn: its DOM image steps aside (the figure stays as the hit area / focus target). */
+.paint-page > .figure[data-fx-gl="drawn"] {
+  background: transparent;
+}
+
+.paint-page > .figure[data-fx-gl="drawn"] > img {
+  visibility: hidden;
+}
+
+.paint-page > .figure[role="button"]:focus-visible {
+  outline: 2px solid var(--fx-ink-bright, #0900ff);
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .fx-paint-layer { display: none; }
+}
+
+/* ---------------------------------------------------------------- GL: focus mode */
+.fx-paint-focus {
+  position: fixed;
+  inset: 0;
+  z-index: var(--fx-z-overlay, 60);
+  visibility: hidden;
+  pointer-events: none;
+  font-family: 'Pixelify Sans', sans-serif;
+}
+
+.fx-paint-focus.is-live {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.fx-paint-focus__veil {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  transition: opacity 620ms var(--fx-ease-out, ease-out);
+}
+
+.fx-paint-focus.is-open .fx-paint-focus__veil {
+  opacity: 0.9;
+  transition-duration: 520ms;
+}
+
+.fx-paint-focus > canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fx-paint-focus__stage {
+  position: absolute;
+  touch-action: none;
+  user-select: none;
+}
+
+.fx-paint-focus__caption {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  color: #000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.16s ease;
+}
+
+.fx-paint-focus__caption.is-on { opacity: 1; transition-duration: 0.05s; }
+
+.fx-paint-focus__lines {
+  min-height: 3.6em;
+  font-size: max(12px, calc(13 * var(--u, 1px)));
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.fx-paint-focus__title {
+  color: var(--fx-ink, #000ca9);
+  font-size: max(14px, calc(16 * var(--u, 1px)));
+  line-height: 1.2;
+  margin-bottom: 0.15em;
+}
+
+.fx-paint-focus__caret {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.9em;
+  margin-left: 0.08em;
+  vertical-align: -0.08em;
+  background: var(--fx-ink, #000ca9);
+}
+
+.fx-paint-focus__close {
+  flex: none;
+  pointer-events: auto;
+  margin: -6px -6px 0 0;
+  padding: 6px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: max(14px, calc(16 * var(--u, 1px)));
+  line-height: 1;
+  color: var(--fx-ink, #000ca9);
+  transition: opacity 0.2s ease;
+}
+
+.fx-paint-focus__close:hover { opacity: 0.6; }
+.fx-paint-focus__close:focus-visible { outline: 2px solid var(--fx-ink-bright, #0900ff); outline-offset: 2px; }
+
+.fx-sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------------------------------------------------------------- lite: tilt + sheen */
+/* Only transformed while live: an identity transform at rest would still change how Chrome resamples the image. */
+.fx-lite-tilt.is-live,
+.fx-lite-live .fx-lite-tilt {
+  transform: perspective(var(--fx-persp, 900px)) rotateX(var(--fx-rx, 0deg)) rotateY(var(--fx-ry, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.fx-lite-sheen {
+  position: absolute;
+  pointer-events: none;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.17) 50%, rgba(255, 255, 255, 0) 62%) no-repeat;
+  background-size: 300% 300%;
+  background-position: var(--fx-sx, 50%) var(--fx-sy, 50%);
+  opacity: var(--fx-sheen, 0);
+}
+
+/* desktop without GL: the figure itself tilts, its sheen is a child. The transition list keeps scroll-reveal's. */
+.paint-page > .figure.fx-lite-tilt {
+  --fx-tilt-dur: 0.6s;
+  transition: transform var(--fx-tilt-dur) var(--fx-ease-out, ease-out) 0ms;
+}
+.paint-page > .figure.fx-lite-tilt.is-tracking { --fx-tilt-dur: 0.12s; }
+.paint-page > .figure > .fx-lite-sheen { inset: 0; transition: opacity 0.4s ease; }
+
+/* phones: each image tilts, its sheen sits on top with the same transform */
+.mobile-paint-gallery figure.fx-lite-fig { position: relative; }
+
+/* ---------------------------------------------------------------- lite: simple viewer */
+.fx-paint-view {
+  position: fixed;
+  inset: 0;
+  z-index: var(--fx-z-overlay, 60);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 72px 16px 24px;
+  background: #fff;
+  font-family: 'Pixelify Sans', sans-serif;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.fx-paint-view.is-open { opacity: 1; }
+
+.fx-paint-view__img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100% - 96px);
+  min-height: 0;
+  object-fit: contain;
+  transform: scale(0.97);
+  transition: transform 0.4s var(--fx-ease-out, ease-out);
+}
+
+.fx-paint-view.is-open .fx-paint-view__img { transform: none; }
+
+.fx-paint-view__cap {
+  margin: 0;
+  color: #000;
+  font-size: 12px;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.fx-paint-view__cap b {
+  display: block;
+  font-weight: 400;
+  color: var(--fx-ink, #000ca9);
+  font-size: 14px;
+}
+
+.fx-paint-view__close {
+  position: absolute;
+  top: calc(13 * var(--u, 1px));
+  right: calc(26 * var(--u, 1px));
+  padding: 6px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: max(14px, calc(16 * var(--u, 1px)));
+  line-height: 1;
+  color: var(--fx-ink, #000ca9);
+}
+
+@media (max-width: 700px) {
+  /* the sticky nav (z 80) stays on top on phones: keep the viewer below it, CLOSE within thumb reach */
+  .fx-paint-view { padding: calc(74 * var(--m, 1px)) 12px 64px; }
+  .fx-paint-view__close {
+    top: auto;
+    right: 50%;
+    bottom: 18px;
+    transform: translateX(50%);
+    font-size: 17px;
+  }
+}

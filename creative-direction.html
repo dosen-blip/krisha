@@ -3,16 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="fx/prepaint.js"></script>
   <title>Krisha Dave - Creative Direction</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
-  <script src="cursor-boot.js"></script>
-  <link rel="stylesheet" href="cursor.css">
-  <link rel="stylesheet" href="scroll-reveal.css">
-  <script src="page-sounds.js"></script>
-  <script src="scroll-reveal.js?v=2" defer></script>
-  <link rel="stylesheet" href="portfolio-pages.css?v=7">
+  <script src="cursor-boot.js?v=2"></script>
+  <link rel="stylesheet" href="cursor.css?v=3">
+  <link rel="stylesheet" href="scroll-reveal.css?v=2">
+  <script src="page-sounds.js?v=2"></script>
+  <script src="scroll-reveal.js?v=4" defer></script>
+  <link rel="stylesheet" href="portfolio-pages.css?v=10">
+  <!-- fx layer (see fx/README.md) -->
+  <link rel="stylesheet" href="fx/fx.css">
+  <link rel="stylesheet" href="fx/transitions.css?v=3">
+  <link rel="stylesheet" href="fx/ring.css">
+  <link rel="stylesheet" href="fx/m-shell.css">
+  <link rel="stylesheet" href="fx/creative.css?v=2">
+  <link rel="stylesheet" href="fx/m-reel.css">
+  <script type="importmap">
+    { "imports": {
+      "three": "./vendor/three/build/three.module.min.js",
+      "three/addons/": "./vendor/three/examples/jsm/"
+    } }
+  </script>
+  <script type="module" src="fx/boot.js?v=4"></script>
 </head>
 <body>
   <div class="page creative-page">
@@ -39,87 +54,91 @@
     </nav>
 
     <section class="mobile-creative-reel" aria-label="Creative direction projects">
+      <!-- Phone reel: each block links to its project; the -1 block of a group is its hero (grow morph, fx/m-reel.js). -->
       <a class="mcr-site-logo" href="index.html"><img src="img-webp/logo.webp" alt=""></a>
       <a class="mcr-site-name" href="index.html">KRISHA DAVE</a>
 
       <!-- WHEN WILL YOU FREE ME? section -->
-      <div class="mcr mcr-wwyfm-1"><img src="img-webp/wwyfm-bg.webp" alt=""></div>
-      <div class="mcr mcr-wwyfm-2"><img src="img-webp/wwyfm-01.webp" alt=""></div>
-      <div class="mcr mcr-wwyfm-3"><img src="img-webp/wwyfm-02.webp" alt=""></div>
-      <div class="mcr mcr-wwyfm-4"><img src="img-webp/wwyfm-03.webp" alt=""></div>
-      <div class="mcr mcr-wwyfm-5"><img src="img-webp/wwyfm-04.webp" alt=""></div>
-      <div class="mcr-rotated-label"><span>WHEN WILL YOU FREE ME? 2026</span></div>
+      <a class="mcr mcr-wwyfm-1" data-mcr="wwyfm" data-mcr-hero data-transition="grow" href="when-will-you-free-me-2026.html" aria-label="WHEN WILL YOU FREE ME? 2026"><img src="img-webp/wwyfm-bg.webp" alt=""></a>
+      <a class="mcr mcr-wwyfm-2" data-mcr="wwyfm" href="when-will-you-free-me-2026.html" tabindex="-1" aria-hidden="true"><img src="img-webp/wwyfm-01.webp" alt=""></a>
+      <a class="mcr mcr-wwyfm-3" data-mcr="wwyfm" href="when-will-you-free-me-2026.html" tabindex="-1" aria-hidden="true"><img src="img-webp/wwyfm-02.webp" alt=""></a>
+      <a class="mcr mcr-wwyfm-4" data-mcr="wwyfm" href="when-will-you-free-me-2026.html" tabindex="-1" aria-hidden="true"><img src="img-webp/wwyfm-03.webp" alt=""></a>
+      <a class="mcr mcr-wwyfm-5" data-mcr="wwyfm" href="when-will-you-free-me-2026.html" tabindex="-1" aria-hidden="true"><img src="img-webp/wwyfm-04.webp" alt=""></a>
+      <a class="mcr-rotated-label" data-mcr="wwyfm" href="when-will-you-free-me-2026.html" tabindex="-1" aria-hidden="true"><span>WHEN WILL YOU FREE ME? 2026</span></a>
 
       <!-- WARDI section -->
-      <div class="mcr mcr-wardi-1"><img src="img-webp/wardi-bg.webp" alt=""></div>
-      <div class="mcr mcr-wardi-2"><img src="img-webp/wardi-01.webp" alt=""></div>
-      <div class="mcr mcr-wardi-3"><img src="img-webp/wardi-02.webp" alt=""></div>
-      <div class="mcr mcr-wardi-4"><img src="img-webp/wardi-03.webp" alt=""></div>
-      <span class="mcr-label mcr-label-wardi">WARDI 2025</span>
+      <a class="mcr mcr-wardi-1" data-mcr="wardi" data-mcr-hero data-transition="grow" href="wardi-2025.html" aria-label="WARDI 2025"><img src="img-webp/wardi-bg.webp" alt=""></a>
+      <a class="mcr mcr-wardi-2" data-mcr="wardi" href="wardi-2025.html" tabindex="-1" aria-hidden="true"><img src="img-webp/wardi-01.webp" alt=""></a>
+      <a class="mcr mcr-wardi-3" data-mcr="wardi" href="wardi-2025.html" tabindex="-1" aria-hidden="true"><img src="img-webp/wardi-02.webp" alt=""></a>
+      <a class="mcr mcr-wardi-4" data-mcr="wardi" href="wardi-2025.html" tabindex="-1" aria-hidden="true"><img src="img-webp/wardi-03.webp" alt=""></a>
+      <a class="mcr-label mcr-label-wardi" data-mcr="wardi" href="wardi-2025.html" tabindex="-1" aria-hidden="true">WARDI 2025</a>
 
       <!-- PRALAYA section -->
-      <div class="mcr mcr-pralaya-1"><img src="img-webp/pralaya-hero.webp" alt=""></div>
-      <div class="mcr mcr-pralaya-2"><img src="img-webp/pralaya-01.webp" alt=""></div>
-      <div class="mcr mcr-pralaya-3"><img src="img-webp/pralaya-02.webp" alt=""></div>
-      <div class="mcr mcr-pralaya-4"><img src="img-webp/pralaya-03.webp" alt=""></div>
-      <div class="mcr mcr-pralaya-5"><img src="img-webp/pralaya-04.webp" alt=""></div>
-      <div class="mcr mcr-pralaya-6"><img src="img-webp/pralaya-05.webp" alt=""></div>
-      <span class="mcr-label mcr-label-pralaya">PRALAYA 2024</span>
+      <a class="mcr mcr-pralaya-1" data-mcr="pralaya" data-mcr-hero data-transition="grow" href="pralaya-2024.html" aria-label="PRALAYA 2024"><img src="img-webp/pralaya-hero.webp" alt=""></a>
+      <a class="mcr mcr-pralaya-2" data-mcr="pralaya" href="pralaya-2024.html" tabindex="-1" aria-hidden="true"><img src="img-webp/pralaya-01.webp" alt=""></a>
+      <a class="mcr mcr-pralaya-3" data-mcr="pralaya" href="pralaya-2024.html" tabindex="-1" aria-hidden="true"><img src="img-webp/pralaya-02.webp" alt=""></a>
+      <a class="mcr mcr-pralaya-4" data-mcr="pralaya" href="pralaya-2024.html" tabindex="-1" aria-hidden="true"><img src="img-webp/pralaya-03.webp" alt=""></a>
+      <a class="mcr mcr-pralaya-5" data-mcr="pralaya" href="pralaya-2024.html" tabindex="-1" aria-hidden="true"><img src="img-webp/pralaya-04.webp" alt=""></a>
+      <a class="mcr mcr-pralaya-6" data-mcr="pralaya" href="pralaya-2024.html" tabindex="-1" aria-hidden="true"><img src="img-webp/pralaya-05.webp" alt=""></a>
+      <a class="mcr-label mcr-label-pralaya" data-mcr="pralaya" href="pralaya-2024.html" tabindex="-1" aria-hidden="true">PRALAYA 2024</a>
 
       <!-- AHLAN section -->
-      <div class="mcr mcr-ahlan-1"><img src="img-webp/ahlan-hero.webp" alt=""></div>
-      <div class="mcr mcr-ahlan-2"><img src="img-webp/ahlan-01.webp" alt=""></div>
-      <div class="mcr mcr-ahlan-3"><img src="img-webp/ahlan-02.webp" alt=""></div>
-      <span class="mcr-label mcr-label-ahlan">AHLAN 2023</span>
+      <a class="mcr mcr-ahlan-1" data-mcr="ahlan" data-mcr-hero data-transition="grow" href="ahlan-2023.html" aria-label="AHLAN 2023"><img src="img-webp/ahlan-hero.webp" alt=""></a>
+      <a class="mcr mcr-ahlan-2" data-mcr="ahlan" href="ahlan-2023.html" tabindex="-1" aria-hidden="true"><img src="img-webp/ahlan-01.webp" alt=""></a>
+      <a class="mcr mcr-ahlan-3" data-mcr="ahlan" href="ahlan-2023.html" tabindex="-1" aria-hidden="true"><img src="img-webp/ahlan-02.webp" alt=""></a>
+      <a class="mcr-label mcr-label-ahlan" data-mcr="ahlan" href="ahlan-2023.html" tabindex="-1" aria-hidden="true">AHLAN 2023</a>
 
       <!-- TALISMAN section -->
-      <div class="mcr mcr-talisman-1">
-        <video autoplay muted loop playsinline poster="img-webp/talisman-hero.webp">
+      <a class="mcr mcr-talisman-1" data-mcr="talisman" data-mcr-hero data-transition="grow" href="talisman-2026.html" aria-label="TALISMAN 2026">
+        <video muted loop playsinline preload="none" poster="img-webp/talisman-hero.webp">
           <source src="video/wwyfm-test-reel-4.mp4" type="video/mp4">
         </video>
-      </div>
-      <div class="mcr mcr-talisman-2"><img src="img-webp/talisman-01.webp" alt=""></div>
-      <div class="mcr mcr-talisman-3"><img src="img-webp/talisman-02.webp" alt=""></div>
-      <div class="mcr mcr-talisman-4"><img src="img-webp/talisman-03.webp" alt=""></div>
-      <div class="mcr mcr-talisman-5"><img src="img-webp/talisman-04.webp" alt=""></div>
-      <span class="mcr-label mcr-label-talisman">TALISMAN 2026</span>
+      </a>
+      <a class="mcr mcr-talisman-2" data-mcr="talisman" href="talisman-2026.html" tabindex="-1" aria-hidden="true"><img src="img-webp/talisman-01.webp" alt=""></a>
+      <a class="mcr mcr-talisman-3" data-mcr="talisman" href="talisman-2026.html" tabindex="-1" aria-hidden="true"><img src="img-webp/talisman-02.webp" alt=""></a>
+      <a class="mcr mcr-talisman-4" data-mcr="talisman" href="talisman-2026.html" tabindex="-1" aria-hidden="true"><img src="img-webp/talisman-03.webp" alt=""></a>
+      <a class="mcr mcr-talisman-5" data-mcr="talisman" href="talisman-2026.html" tabindex="-1" aria-hidden="true"><img src="img-webp/talisman-04.webp" alt=""></a>
+      <a class="mcr-label mcr-label-talisman" data-mcr="talisman" href="talisman-2026.html" tabindex="-1" aria-hidden="true">TALISMAN 2026</a>
 
-      <!-- SECURITY MAGAZINE section -->
-      <div class="mcr mcr-security-1"><img src="img-webp/security-01.webp" alt=""></div>
-      <div class="mcr mcr-security-2"><img src="img-webp/security-03.webp" alt=""></div>
-      <div class="mcr mcr-security-3"><img src="img-webp/security-02.webp" alt=""></div>
-      <div class="mcr mcr-security-4"><img src="img-webp/security-02.webp" alt=""></div>
-      <div class="mcr mcr-security-5"><img src="img-webp/security-05.webp" alt=""></div>
-      <div class="mcr mcr-security-6"><img src="img-webp/security-06.webp" alt=""></div>
-      <div class="mcr mcr-security-7"><img src="img-webp/security-07.webp" alt=""></div>
-      <div class="mcr mcr-security-8"><img src="img-webp/security-08.webp" alt=""></div>
-      <div class="mcr mcr-security-9"><img src="img-webp/security-09.webp" alt=""></div>
-      <div class="mcr mcr-security-10"><img src="img-webp/security-10.webp" alt=""></div>
+      <!-- SECURITY MAGAZINE section: Issue 00 + Issue 01 -->
+      <a class="mcr mcr-security-1" data-mcr="security" data-mcr-hero data-transition="grow" href="security-magazine-2025.html" aria-label="SECURITY MAGAZINE">
+        <video autoplay muted loop playsinline preload="metadata" poster="img-webp/security-issue-00-poster.webp">
+          <source src="video/security-issue-00.mp4" type="video/mp4">
+        </video>
+      </a>
+      <a class="mcr mcr-security-2" data-mcr="security" href="security-magazine-2025.html" tabindex="-1" aria-hidden="true"><img src="img-webp/security-00-cover.webp" alt="" loading="lazy"></a>
+      <a class="mcr mcr-security-3" data-mcr="security" href="security-magazine-2025.html" tabindex="-1" aria-hidden="true"><img src="img-webp/security-01-cover.webp" alt="" loading="lazy"></a>
+      <a class="mcr mcr-security-4" data-mcr="security" href="security-magazine-2025.html" tabindex="-1" aria-hidden="true">
+        <video autoplay muted loop playsinline preload="metadata" poster="img-webp/security-issue-01-poster.webp">
+          <source src="video/security-issue-01.mp4" type="video/mp4">
+        </video>
+      </a>
+      <a class="mcr-label mcr-label-security" data-mcr="security" href="security-magazine-2025.html" tabindex="-1" aria-hidden="true">SECURITY MAGAZINE</a>
 
       <!-- Bottom paint link -->
       <a class="mcr-paint-link" href="paint.html">PAINT&gt;</a>
     </section>
 
-    <a class="figure cd-pralaya" href="pralaya-2024.html"><img src="img-webp/paint-pralaya.webp" alt="PRALAYA 2024"></a>
-    <a class="text cd-label-pralaya" href="pralaya-2024.html">PRALAYA&nbsp; 2024</a>
+    <a class="figure cd-pralaya" data-transition="grow" data-cursor="view" href="pralaya-2024.html"><img src="img-webp/paint-pralaya.webp" alt="PRALAYA 2024"></a>
+    <a class="text cd-label-pralaya" data-transition="grow" href="pralaya-2024.html">PRALAYA&nbsp; 2024</a>
 
-    <a class="figure cd-free-me" href="when-will-you-free-me-2026.html"><img src="img-webp/paint-free-me.webp" alt="WHEN WILL YOU FREE ME 2026"></a>
-    <a class="text cd-label-free-me" href="when-will-you-free-me-2026.html">WHEN WILL YOU FREE ME&nbsp;&nbsp; 2025</a>
+    <a class="figure cd-free-me" data-transition="grow" data-cursor="view" href="when-will-you-free-me-2026.html"><img src="img-webp/paint-free-me.webp" alt="WHEN WILL YOU FREE ME 2026"></a>
+    <a class="text cd-label-free-me" data-transition="grow" href="when-will-you-free-me-2026.html">WHEN WILL YOU FREE ME&nbsp;&nbsp; 2025</a>
 
-    <a class="figure cd-talisman" href="talisman-2026.html"><img src="img-webp/paint-talisman.webp" alt="TALISMAN 2026"></a>
-    <a class="text cd-label-talisman" href="talisman-2026.html">TALISMAN 2026</a>
+    <a class="figure cd-talisman" data-transition="grow" data-cursor="view" href="talisman-2026.html"><img src="img-webp/paint-talisman.webp" alt="TALISMAN 2026"></a>
+    <a class="text cd-label-talisman" data-transition="grow" href="talisman-2026.html">TALISMAN 2026</a>
 
-    <a class="figure cd-ahlan" href="ahlan-2023.html"><img src="img-webp/paint-ahlan.webp" alt="AHLAN 2023"></a>
-    <a class="text cd-label-ahlan" href="ahlan-2023.html">AHLAN&nbsp; 2025</a>
+    <a class="figure cd-ahlan" data-transition="grow" data-cursor="view" href="ahlan-2023.html"><img src="img-webp/paint-ahlan.webp" alt="AHLAN 2023"></a>
+    <a class="text cd-label-ahlan" data-transition="grow" href="ahlan-2023.html">AHLAN&nbsp; 2025</a>
 
-    <a class="figure cd-security" href="security-magazine-2025.html"><img src="img-webp/paint-security.webp" alt="SECURITY MAGAZINE 2025"></a>
-    <a class="text cd-label-security" href="security-magazine-2025.html">SECURITY MAGAZINE 2025</a>
+    <a class="figure fill cd-security" data-transition="grow" data-cursor="view" href="security-magazine-2025.html"><img src="img-webp/paint-security-issues.webp" alt="SECURITY MAGAZINE, Issues 00 and 01"></a>
+    <a class="text cd-label-security" data-transition="grow" href="security-magazine-2025.html">SECURITY MAGAZINE</a>
 
-    <a class="figure cd-wardi" href="wardi-2025.html"><img src="img-webp/paint-wardi.webp" alt="WARDI 2025"></a>
-    <a class="text cd-label-wardi" href="wardi-2025.html">WARDI 2025</a>
+    <a class="figure cd-wardi" data-transition="grow" data-cursor="view" href="wardi-2025.html"><img src="img-webp/paint-wardi.webp" alt="WARDI 2025"></a>
+    <a class="text cd-label-wardi" data-transition="grow" href="wardi-2025.html">WARDI 2025</a>
     <a class="text next-link creative-next" href="paint.html">PAINT&gt;</a>
   </div>
-  <script src="mobile-menu.js"></script>
+  <script src="mobile-menu.js?v=2"></script>
   <script src="cursor.js"></script>
 </body>
 </html>

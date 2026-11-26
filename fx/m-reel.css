@@ -1,0 +1,31 @@
+/* fx/m-reel.css — the creative-direction phone reel (owned by fx/m-reel.js + fx/m-reel-lite.js, see fx/README.md).
+   Everything is scoped to html.fx-phone inside the ≤700px query: the desktop page never matches. */
+
+@media (max-width: 700px) {
+
+  /* ---- the blocks are links now: no OS tap flash, no text-link styling ---------------------------------------- */
+  html.fx-phone .mobile-creative-reel a.mcr,
+  html.fx-phone .mobile-creative-reel a.mcr-label,
+  html.fx-phone .mobile-creative-reel a.mcr-rotated-label {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    text-decoration: none;
+  }
+
+  /* A hero tapped for the grow morph wears .figure for a moment (fx/transitions.js morphs a.figure): none of the
+     desktop tile hover (brighten, zoom, compositing layer) may start under the morph. */
+  html.fx-phone .mobile-creative-reel > a.mcr.figure,
+  html.fx-phone .mobile-creative-reel > a.mcr.figure:hover {
+    filter: none;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  html.fx-phone .mobile-creative-reel > a.mcr.figure > img,
+  html.fx-phone .mobile-creative-reel > a.mcr.figure:hover > img {
+    position: static;
+    transform: none;
+    transition: none;
+  }
+}

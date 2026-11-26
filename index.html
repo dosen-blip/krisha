@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="fx/prepaint.js"></script>
   <title>Krisha Dave — Visual Production & Art Direction</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&family=Azeret+Mono&display=swap" rel="stylesheet">
-  <script src="cursor-boot.js"></script>
-  <link rel="stylesheet" href="cursor.css">
-  <link rel="stylesheet" href="scroll-reveal.css">
-  <script src="page-sounds.js"></script>
-  <script src="scroll-reveal.js?v=2" defer></script>
+  <script src="cursor-boot.js?v=2"></script>
+  <link rel="stylesheet" href="cursor.css?v=3">
+  <link rel="stylesheet" href="scroll-reveal.css?v=2">
+  <script src="page-sounds.js?v=2"></script>
+  <script src="scroll-reveal.js?v=4" defer></script>
   <style>
     *, *::before, *::after {
       margin: 0;
@@ -176,6 +177,18 @@
     }
 
   </style>
+  <!-- fx layer (see fx/README.md) -->
+  <link rel="stylesheet" href="fx/fx.css">
+  <link rel="stylesheet" href="fx/transitions.css?v=3">
+  <link rel="stylesheet" href="fx/m-shell.css">
+  <link rel="stylesheet" href="fx/arrival.css">
+  <script type="importmap">
+    { "imports": {
+      "three": "./vendor/three/build/three.module.min.js",
+      "three/addons/": "./vendor/three/examples/jsm/"
+    } }
+  </script>
+  <script type="module" src="fx/boot.js?v=4"></script>
 </head>
 <body>
   <div class="hero">

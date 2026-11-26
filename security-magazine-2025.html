@@ -3,19 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Krisha Dave - SECURITY MAGAZINE 2025</title>
+  <script src="fx/prepaint.js"></script>
+  <title>Krisha Dave - SECURITY MAGAZINE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
-  <script src="cursor-boot.js"></script>
-  <link rel="stylesheet" href="cursor.css">
-  <link rel="stylesheet" href="scroll-reveal.css">
-  <script src="page-sounds.js"></script>
-  <script src="scroll-reveal.js?v=2" defer></script>
-  <link rel="stylesheet" href="portfolio-pages.css?v=7">
+  <script src="cursor-boot.js?v=2"></script>
+  <link rel="stylesheet" href="cursor.css?v=3">
+  <link rel="stylesheet" href="scroll-reveal.css?v=2">
+  <script src="page-sounds.js?v=2"></script>
+  <script src="scroll-reveal.js?v=4" defer></script>
+  <link rel="stylesheet" href="portfolio-pages.css?v=10">
+  <!-- fx layer (see fx/README.md) -->
+  <link rel="stylesheet" href="fx/fx.css">
+  <link rel="stylesheet" href="fx/transitions.css?v=3">
+  <link rel="stylesheet" href="fx/ring.css">
+  <link rel="stylesheet" href="fx/m-shell.css">
+  <link rel="stylesheet" href="fx/security.css">
+  <link rel="stylesheet" href="fx/m-security.css">
+  <script type="importmap">
+    { "imports": {
+      "three": "./vendor/three/build/three.module.min.js",
+      "three/addons/": "./vendor/three/examples/jsm/"
+    } }
+  </script>
+  <script type="module" src="fx/boot.js?v=4"></script>
 </head>
 <body>
-  <div class="page security-page">
+  <div class="page security-page security-hub">
     <nav class="nav" aria-label="Primary">
       <img class="nav__logo" src="img-webp/logo.webp" alt="">
       <a class="nav__home" href="index.html">KRISHA DAVE</a>
@@ -38,20 +53,25 @@
       </details>
     </nav>
 
-    <div class="security-logo"><img src="img-webp/security-04.webp" alt=""></div>
-    <div class="figure fill security-01"><img src="img-webp/security-01.webp" alt=""></div>
-    <div class="figure fill security-02"><img src="img-webp/security-02.webp" alt=""></div>
-    <div class="figure security-03"><img src="img-webp/security-03.webp" alt=""></div>
+    <div class="security-logo" data-fx-ring="emblem"><img src="img-webp/security-04.webp" alt=""></div>
     <p class="text security-copy">Security magazine is a bold and introspective platform born from our personal experiences as Easterners navigating life in the West. The name Security serves as a double entendre: it symbolizes both a haven for those seeking safety and understanding, and a poignant nod to the unsettling moments when security has been called against us for merely existing. This magazine is a collective scream&mdash;a visceral expression of identity, frustration, and resilience&mdash;manifested through visual art, fashion, interviews, and academic discourse.</p>
-    <div class="figure fill security-05"><img src="img-webp/security-05.webp" alt=""></div>
-    <div class="figure security-06"><img src="img-webp/security-06.webp" alt=""></div>
-    <div class="figure fill security-07"><img src="img-webp/security-07.webp" alt=""></div>
-    <div class="figure fill security-08"><img src="img-webp/security-08.webp" alt=""></div>
-    <div class="figure security-09"><img src="img-webp/security-09.webp" alt=""></div>
-    <div class="figure fill security-10"><img src="img-webp/security-10.webp" alt=""></div>
+
+    <!-- Two issues; each opens its own page (security-issue-00.html, security-issue-01.html) -->
+    <div class="sec-hub">
+      <div class="sec-hub__issue sec-hub__issue--00">
+        <a class="figure fill sec-hub__cover" data-transition="grow" data-cursor="view" href="security-issue-00.html"><img src="img-webp/security-00-cover.webp" alt="Security Issue 00, Silken Boundaries, cover"></a>
+        <p class="text sec-hub__label"><span class="sec-hub__no">ISSUE 00</span><br>SILKEN BOUNDARIES<br>2025</p>
+        <a class="text next-link sec-hub__open" data-transition="grow" href="security-issue-00.html">OPEN ISSUE 00&gt;</a>
+      </div>
+      <div class="sec-hub__issue sec-hub__issue--01">
+        <a class="figure fill sec-hub__cover" data-transition="grow" data-cursor="view" href="security-issue-01.html"><img src="img-webp/security-01-cover.webp" alt="Security Issue 01, The Bootleg Issue, cover"></a>
+        <p class="text sec-hub__label"><span class="sec-hub__no">ISSUE 01</span><br>THE BOOTLEG ISSUE<br>2026</p>
+        <a class="text next-link sec-hub__open" data-transition="grow" href="security-issue-01.html">OPEN ISSUE 01&gt;</a>
+      </div>
+    </div>
     <a class="text next-link security-next" href="when-will-you-free-me-2026.html">NEXT PROJECT&gt;</a>
   </div>
-  <script src="mobile-menu.js"></script>
+  <script src="mobile-menu.js?v=2"></script>
   <script src="cursor.js"></script>
 </body>
 </html>
